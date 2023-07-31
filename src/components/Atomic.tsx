@@ -33,7 +33,7 @@ export const TextArea = styled.textarea`
 	background-color: transparent;
 	padding: 10px 20px;
 	color: #414042;
-	font-size: 15px;
+	font-size: 13px;
 	border: 1px black solid;
 	width: 100%;
 	min-height: 100px;
@@ -189,11 +189,11 @@ export const ArrowRight = styled.div`
 `;
 
 export const ArrowLeftIconStyled = styled(Icon)`
-	font-size: 22px;
+	font-size: 20px;
 `;
 
 export const ArrowRightIconStyled = styled(Icon)`
-	font-size: 22px;
+	font-size: 20px;
 `;
 
 export const TooltipContent = styled.div`

@@ -1,7 +1,7 @@
    :root {
-    --podium-cds-typography-body1-strong: 500 1rem/1.5 'Inter';
-    --podium-cds-typography-body2: 400 .875rem/1.5 'Inter';
-    --podium-cds-typography-body3: 800 1.4rem/1.5 'Inter';
+    --podium-cds-typography-body1-strong: 200 .5rem/1.5 'Inter';
+    --podium-cds-typography-body2: 200 .5rem/.5 'Inter';
+    --podium-cds-typography-body3: 200 .4rem/.5 'Inter';
   }
 
   body {
@@ -37,10 +37,12 @@
     display: flex;
     justify-content: space-between;
     font-family: "Helvetica Now Text";
-    height: 40px;
+    height: 60px;
     position: absolute;
     width: 100%;
     top: 28px;
+    background-color: #ededed;
+
   } 
 
   .tray-header-1 {

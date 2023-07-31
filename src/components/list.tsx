@@ -6,10 +6,11 @@ export const List = styled.ul`
     display: flex;
     align-items: center;
     margin-bottom: 24px; 
-    border-radius: 50px;
+    border-radius: 5px;
     white-space: nowrap;
     justify-content: center;
-
+    background-color: #ededed;
+    height: 30px;
     @media screen and (max-width: 568px) {
         width: 100vw;
         transform-origin: 50% 50% 0px;
@@ -24,21 +25,25 @@ export const List = styled.ul`
 export const ListItem = styled.li<{ selected?: boolean }>`
     display: flex;
     flex-direction: column;    
-    font: 500 1.1rem/1.5 'Inter';
+    font: 300 1.1rem/1.5 'Inter';
     align-items: center;
     text-align: center;
     justify-content: center;
     padding: 0px 10px;
-    border: 1px #DDD solid;
+    border: 1px #DDD none;
     cursor: pointer;
     margin: 0 10px;
-    border-radius: 50px;
+    border-radius: ${props => props.selected ? '19px 19px 38px 0px' : '0px'};
     width: 152px;
-    height: 36px;
+    height: ${props => props.selected ? '47px' : '30px'};
     border-color: ${props => props.selected ? 'black' : '#DDD'};
     white-space: nowrap;
+    background-color: ${props => props.selected && '#f6fafd'};
     &:hover {
         background-color: #ffd966;
+        border-radius: 19px 19px 38px 0px;
+        height: 47px;
+
     }
 `;
 

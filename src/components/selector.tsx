@@ -11,10 +11,10 @@ import MenuTriggerButton from "./MenuTriggerButton";
 import ProgressBarLoadingOverlay from "./widgets/ProgressBarLoadingOverlay";
 import Designer from "./layouts/Designer";
 import { GroupItem, GroupIcon } from "./layouts/LayoutStyled";
-import { createPortal } from 'react-dom';
-import useStore from '../Store';
+import { createPortal } from "react-dom";
+import useStore from "../Store";
 
-const dialogsPortal = document.getElementById('dialogs-portal')!;
+const dialogsPortal = document.getElementById("dialogs-portal")!;
 // const Container = styled.div`
 // overflow: auto;
 // width: 100%;
@@ -108,11 +108,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   if (indexToRemove !== -1) {
     groups.splice(indexToRemove, 1);
   }
-  
-  const dialogsPortal = document.getElementById('dialogs-portal');
 
-       
-
+  const dialogsPortal = document.getElementById("dialogs-portal");
 
   useEffect(() => {
     const handleResize = () => {
@@ -131,7 +128,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   // Open the first group and the first step when loaded
   useEffect(() => {
     if (!selectedGroup && groups.length > 0) {
-
       console.log("items", items, "groups", groups, "product", product);
 
       selectGroup(groups[0].id);
@@ -269,33 +265,21 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     selectGroupIdFromTray(filteredArray[0].id);
   };
 
-  // Styling for height: 230px;
-  // const Container = styled.div`
-  //   overflow: auto;
-  //   width: 100%;
-  //   ${!selectedTrayPreviewOpenButton
-  //   ? css`
-  //       height: 230px;
-  //     `
-  //   : css`
-  //       height: 70px;
-  //     `}
-  // `;
+  const togglePersonalize = () => {
+    setSelectedPersonalize(!selectedPersonalize);
+  };
 
- const togglePersonalize = () => {
-  setSelectedPersonalize(!selectedPersonalize)
- }
-
- const containerStyles = {
-  overflow: "auto",
-  width: "100%",
-  height: !selectedTrayPreviewOpenButton ? "230px" : "70px",
- };
+  const containerStyles = {
+    overflow: "auto",
+    width: "100%",
+    height: !selectedTrayPreviewOpenButton ? "230px" : "70px",
+  };
 
   return (
-    <>    
+    <>
       <div className="top-nav">
-        {width > 568 ? (
+        {/* Does not require in Peggel */}
+        {/* {width > 568 ? (
           <div className="body-3" id="product-info">
             <span>{productName}</span>
             <span>LEI {price}</span>
@@ -304,20 +288,11 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
           <div className="body-3" id="product-info">
             {" "}
           </div>
-        )}
+        )} */}
       </div>
-{/* 
-      {
-      /////// testing 
-        createPortal(<div className="modal"  
-        style={{ zIndex: '25', position: 'absolute',
-          top: '12%' }}>
-        <h1>I'm a modal dialog</h1>
-        </div>, document.body)
-        //////// testing 
-      } */}
 
-      {!isMobile && !isTrayOpen ? (        
+      {/* Does not require in Peggel */}
+      {/* {!isMobile && !isTrayOpen ? (        
         <div style={{ position: "absolute", top: "36%", bottom: "45%" }}>          
           <div
             className="Atomic__Icon-sc-v58oaw-1 LayoutStyled__ZoomInIcon-sc-1nws045-19 gIdUDj dgqSKi"
@@ -339,10 +314,9 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
         </div>
       ) : (
         ""
-      )}
+      )} */}
 
-
-    {isMobile && !isTrayOpen ? (        
+      {/* {isMobile && !isTrayOpen ? (        
         <div style={{ position: "absolute", top: "20%" }}>          
           <div
             className="Atomic__Icon-sc-v58oaw-1 LayoutStyled__ZoomInIcon-sc-1nws045-19 gIdUDj dgqSKi"
@@ -364,57 +338,13 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
         </div>
       ) : (
         ""
-      )}
-
-
-
+      )} */}
 
       {/* <GroupItem   */}
 
-      {/* Personalize A */}
-      {!isMobile && 
-        <div
-        className="LayoutStyled__GroupItem-sc-1nws045-2 iHdtWA group-item selected"
-        style={{ position: "absolute", top: "4%", right: "2%" , cursor: "pointer", marginLeft: '20px'}}
-      >
-        <div
-          className="button-53"
-          onClick={() => setSelectedPersonalize(!selectedPersonalize)}
-        >
-          
-          <span style={{display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '10px'}}>Personaliza</span>
-        </div>
-        {selectedPersonalize ? <Designer togglePersonalize={togglePersonalize} /> : ""}
-      </div>
-      }
-
-      {isMobile && 
-        <div
-        className="LayoutStyled__GroupItem-sc-1nws045-2 iHdtWA group-item selected"
-        style={{ position: "absolute", top: "4%", left: "63%" , cursor: "pointer"}}
-      >
-        <div
-          className="button-53"
-          onClick={() => setSelectedPersonalize(!selectedPersonalize)}
-        >
-          <span style={{display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '10px'}}>Personaliza</span>
-        </div>
-        {selectedPersonalize ? <Designer togglePersonalize={togglePersonalize} /> : ""}
-      </div>
-      }
-      
-
-    
       <div className="animate-wrapper-0">
         <div style={containerStyles}>
           <div className="tray-header">
-            <TrayPreviewOpenButton
-              width={width}
-              trayPreviewOpenButton={trayPreviewOpenButton}
-              selectedTrayPreviewOpenButton={selectedTrayPreviewOpenButton}
-              selectTrayPreviewOpenButton={selectTrayPreviewOpenButton}
-            />
-
             <div
               style={{
                 display: "flex",
@@ -437,16 +367,21 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                   <svg
                     aria-hidden="true"
                     focusable="false"
-                    viewBox="0 0 24 24"
+                    viewBox="0 0 48 24"
                     role="img"
-                    width="24px"
+                    width="48px"
                     height="24px"
                     fill="none"
                   >
                     <path
                       stroke="currentColor"
-                      strokeWidth="1.5"
-                      d="M11.021 18.967L4.055 12l6.966-6.967M4 12h17"
+                      strokeWidth="2"
+                      d="M7,18 L1,12 L7,6"
+                    ></path>
+                    <path
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      d="M15,18 L9,12 L15,6"
                     ></path>
                   </svg>
                 </div>
@@ -472,10 +407,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     >
                       {groups[currentIndex].name}
                     </span>
-                    <span className="active-marketing-component-index">
-                      {" "}
-                      {currentIndex + 1} / {groups.length}
-                    </span>
                   </div>
                 </div>
               </div>
@@ -483,16 +414,21 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                 <svg
                   aria-hidden="true"
                   focusable="false"
-                  viewBox="0 0 24 24"
+                  viewBox="0 0 32 24"
                   role="img"
-                  width="24px"
+                  width="32px"
                   height="24px"
                   fill="none"
                 >
                   <path
                     stroke="currentColor"
-                    strokeWidth="1.5"
-                    d="M12.979 18.967L19.945 12 12.98 5.033M20 12H3"
+                    strokeWidth="2"
+                    d="M1,6 L7,12 L1,18"
+                  ></path>
+                  <path
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    d="M9,6 L15,12 L9,18"
                   ></path>
                 </svg>
               </button>
@@ -500,18 +436,9 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
             {/* Closed on request of Paul */}
             {/* <MenuTriggerButton width={width} toggleTray={toggleTray} /> */}
-            
           </div>
 
           <br />
-
-          {/* <List>
-            {groups.map(group => {
-                return <ListItem key={group.id} onClick={() => {
-                    selectGroup(group.id)
-                }} selected={selectedGroup === group}> {group.id === -1 ? 'Other' : group.name}</ListItem>;
-            })}
-        </List> */}
 
           <div className={`animate-wrapper${isTrayOpen ? "-2 show" : ""}`}>
             {isTrayOpen && !selectedTrayPreviewOpenButton && (
