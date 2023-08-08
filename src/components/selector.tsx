@@ -441,17 +441,12 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
           <br />
 
           <div className={`animate-wrapper${isTrayOpen ? "-2 show" : ""}`}>
-            {isTrayOpen && !selectedTrayPreviewOpenButton && (
-              <Tray
-                groupNameList={selectedGroupList}
-                toggleFunc={toggleTray}
-                UpdateGroupId={groupIdFromFunc}
-              />
-            )}
+            
             {selectedGroup &&
               !selectedTrayPreviewOpenButton &&
               selectedGroup.steps.length > 0 &&
               !isTrayOpen && (
+               <div style={{backgroundColor: '#DDD', width: '100vw'}}> 
                 <List>
                   {selectedGroup.steps.map((step) => {
                     return (
@@ -465,15 +460,17 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     );
                   })}
                 </List>
+                </div>
               )}
 
             {!selectedTrayPreviewOpenButton && (
-              <div style={{}}>
+              <div style={{ width: '100vw'}}>
                 <List>
                   {attributes &&
                     !isTrayOpen &&
                     attributes.map((attribute) => {
                       return (
+                        <div className='ddd' style={{backgroundColor: '#DDD'}}> 
                         <ListItem
                           key={attribute.id}
                           onClick={() => selectAttribute(attribute.id)}
@@ -481,16 +478,20 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                         >
                           {attribute.name}
                         </ListItem>
+                        </div>
                       );
                     })}
                 </List>
+              <br />
 
+               <div style={{backgroundColor: '#fff'}}>       
                 <List>
                   {!selectedTrayPreviewOpenButton &&
                     selectedAttribute &&
                     !isTrayOpen &&
                     selectedAttribute.options.map((option) => {
                       return (
+                       <div style={{backgroundColor: '#fff'}}>  
                         <ListItemColor
                           key={option.id}
                           onClick={() => selectOption(option.id)}
@@ -507,10 +508,12 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
                           {/* //{option.name} */}
                         </ListItemColor>
+                       </div>
                       );
                     })}
                   {/* {selectedColorName}   */}
                 </List>
+              </div>     
               </div>
             )}
           </div>
