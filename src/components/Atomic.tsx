@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components/macro';
 import Carousel from 'nuka-carousel';
 
-export const CarouselContainer = styled(Carousel)`
-  border-bottom:2px solid #c4c4c4;
+export const CarouselContainer = styled(Carousel)` 
   position: relative;
+  height: 96px;
 `;
 
 export const Icon = styled.div<{ hoverable?: boolean }>`

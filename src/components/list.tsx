@@ -77,7 +77,7 @@ export const ListItemColor = styled.li<{ selected?: boolean, selectedColor?: any
     border-color: ${props => props.selected ? 'black' : '#DDD'};
 
     &:hover {
-        background-color: #D8D8D8;
+      
     };
     
     &:before {
@@ -91,7 +91,7 @@ export const ListItemColor = styled.li<{ selected?: boolean, selectedColor?: any
     content: "${props => { return props.selected ? props.selectedColor : ''
                         }}";
     position: absolute;
-    bottom: 7%;    
+    bottom: -1%;    
     }
     
     @media screen and (max-width: 568px) {
@@ -101,8 +101,8 @@ export const ListItemColor = styled.li<{ selected?: boolean, selectedColor?: any
     }`;
 
 export const ListItemImage = styled.img<{ selected?: any }>`
-    width: 5.5em;
-    height: 5.5em;
+    width: 4.7em;
+    height: 80px;
     object-fit: contain;
     margin: 0px 11px;
     border-radius: 22%;

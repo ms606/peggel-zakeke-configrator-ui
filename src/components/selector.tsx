@@ -13,6 +13,15 @@ import Designer from "./layouts/Designer";
 import { GroupItem, GroupIcon } from "./layouts/LayoutStyled";
 import { createPortal } from "react-dom";
 import useStore from "../Store";
+import {
+  ArrowLeft,
+  ArrowLeftIconStyled,
+  ArrowRight,
+  ArrowRightIconStyled,
+  CarouselContainer,
+} from "./Atomic";
+import { ReactComponent as ArrowRightIcon } from "../assets/icons/arrow-right-solid.svg";
+import { ReactComponent as ArrowLeftIcon } from "../assets/icons/arrow-left-solid.svg";
 
 const dialogsPortal = document.getElementById("dialogs-portal")!;
 // const Container = styled.div`
@@ -195,6 +204,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedGroupId]);
+
+  const [selectedCarouselSlide, setSelectedCarouselSlide] = useState<number>(0);
 
   if (isSceneLoading || !groups || groups.length === 0)
     return (
@@ -441,79 +452,123 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
           <br />
 
           <div className={`animate-wrapper${isTrayOpen ? "-2 show" : ""}`}>
-            
             {selectedGroup &&
               !selectedTrayPreviewOpenButton &&
               selectedGroup.steps.length > 0 &&
               !isTrayOpen && (
-               <div style={{backgroundColor: '#DDD', width: '100vw'}}> 
-                <List>
-                  {selectedGroup.steps.map((step) => {
-                    return (
-                      <ListItem
-                        key={step.id}
-                        onClick={() => selectStep(step.id)}
-                        selected={selectedStep === step}
-                      >
-                        Step: {step.name}
-                      </ListItem>
-                    );
-                  })}
-                </List>
+                <div style={{ backgroundColor: "#DDD", width: "100vw" }}>
+                  <List>
+                    {selectedGroup.steps.map((step) => {
+                      return (
+                        <ListItem
+                          key={step.id}
+                          onClick={() => selectStep(step.id)}
+                          selected={selectedStep === step}
+                        >
+                          Step: {step.name}
+                        </ListItem>
+                      );
+                    })}
+                  </List>
                 </div>
               )}
 
             {!selectedTrayPreviewOpenButton && (
-              <div style={{ width: '100vw'}}>
+              <div style={{ width: "100vw" }}>
                 <List>
                   {attributes &&
                     !isTrayOpen &&
                     attributes.map((attribute) => {
                       return (
-                        <div className='ddd' style={{backgroundColor: '#DDD'}}> 
-                        <ListItem
-                          key={attribute.id}
-                          onClick={() => selectAttribute(attribute.id)}
-                          selected={selectedAttribute === attribute}
+                        <div
+                          className="ddd"
+                          style={{ backgroundColor: "#DDD" }}
                         >
-                          {attribute.name}
-                        </ListItem>
+                          <ListItem
+                            key={attribute.id}
+                            onClick={() => selectAttribute(attribute.id)}
+                            selected={selectedAttribute === attribute}
+                          >
+                            {attribute.name}
+                          </ListItem>
                         </div>
                       );
                     })}
                 </List>
-              <br />
+                <br />
 
-               <div style={{backgroundColor: '#fff'}}>       
-                <List>
-                  {!selectedTrayPreviewOpenButton &&
-                    selectedAttribute &&
-                    !isTrayOpen &&
-                    selectedAttribute.options.map((option) => {
+                <div style={{ backgroundColor: "#fff" }}>
+                  <CarouselContainer
+                    slidesToScroll={1}
+                    speed={50}
+                    slidesToShow={window.innerWidth <= 1600 ? 3 : 4}
+                    slideIndex={selectedCarouselSlide}
+                    afterSlide={setSelectedCarouselSlide}
+                    renderBottomCenterControls={() => <span />}
+                    renderCenterRightControls={() => {
+                      // if (
+                      //   selectedCarouselSlide !==
+                      //   (finalVisibleAreas.length - slidesToShow > 0
+                      //     ? finalVisibleAreas.length - slidesToShow
+                      //     : selectedCarouselSlide)
+                      // )
                       return (
-                       <div style={{backgroundColor: '#fff'}}>  
-                        <ListItemColor
-                          key={option.id}
-                          onClick={() => selectOption(option.id)}
-                          selected={option.selected}
-                          selectedColor={selectedColorName}
+                        <ArrowRight
+                          onClick={() =>
+                            setSelectedCarouselSlide(selectedCarouselSlide + 1)
+                          }
                         >
-                          {option.imageUrl && (
-                            <ListItemImage
-                              src={option.imageUrl}
-                              onClick={() => selectColorName(option.name)}
-                              selected={option.selected}
-                            />
-                          )}
-
-                          {/* //{option.name} */}
-                        </ListItemColor>
-                       </div>
+                          <ArrowRightIconStyled>
+                            <ArrowRightIcon />
+                          </ArrowRightIconStyled>
+                        </ArrowRight>
                       );
-                    })}
-                  {/* {selectedColorName}   */}
-                </List>
-              </div>     
+                    }}
+                    renderCenterLeftControls={() => {
+                      if (selectedCarouselSlide !== 0)
+                        return (
+                          <ArrowLeft
+                            onClick={() =>
+                              setSelectedCarouselSlide(
+                                selectedCarouselSlide - 1
+                              )
+                            }
+                          >
+                            <ArrowLeftIconStyled>
+                              <ArrowLeftIcon />
+                            </ArrowLeftIconStyled>
+                          </ArrowLeft>
+                        );
+                    }}
+                  >
+                    <List style={{ backgroundColor: "#fff", height: '80px' }}>
+                      {!selectedTrayPreviewOpenButton &&
+                        selectedAttribute &&
+                        !isTrayOpen &&
+                        selectedAttribute.options.map((option) => {
+                          return (
+                             <div style={{ backgroundColor: "#fff", height: '80px' }}>
+                              <ListItemColor
+                                key={option.id}
+                                onClick={() => selectOption(option.id)}
+                                selected={option.selected}
+                                selectedColor={selectedColorName}
+                              >
+                                {option.imageUrl && (
+                                  <ListItemImage
+                                    src={option.imageUrl}
+                                    onClick={() => selectColorName(option.name)}
+                                    selected={option.selected}
+                                  />
+                                )}
+                              </ListItemColor>                            
+                             </div>
+                          );
+                        })}
+                      {/* {selectedColorName}   */}
+                    </List>
+                  </CarouselContainer>
+                </div>
               </div>
             )}
           </div>
