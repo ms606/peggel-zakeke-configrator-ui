@@ -37,7 +37,7 @@ export const ListItem = styled.li<{ selected?: boolean }>`
     height: ${props => props.selected ? '3em' : '3em'};
     border-color: ${props => props.selected ? 'black' : '#DDD'};
     white-space: nowrap;
-    background-color: ${props => props.selected && '#fff'};
+   // background-color: ${props => props.selected && '#fff'};
     &:hover {
         background-color: #f3f45;        
     }
@@ -45,7 +45,7 @@ export const ListItem = styled.li<{ selected?: boolean }>`
         content:${props => props.selected && 'aaa'}; 
         width:  ${props => props.selected && '20px'}; 
         height: ${props => props.selected && '10px'}; 
-        background-color: ${props => props.selected && '#fff'}; 
+       // background-color: ${props => props.selected && '#fff'}; 
         position: absolute;        
         }       
     &:after {
@@ -53,7 +53,7 @@ export const ListItem = styled.li<{ selected?: boolean }>`
         content:''; 
         width: 12em;
         height: '10px'; 
-        background-color: '#fff';
+       // background-color: '#fff';
         top: 3%;
         border-radius: 64px 61px 12px 0px;
         }               
@@ -70,7 +70,7 @@ export const ListItemColor = styled.li<{ selected?: boolean, selectedColor?: any
     margin: 0 11px;
     border-radius: 100%;
     width: 5.5em;
-    height: 5.5em;
+    height: 5.1em;
     white-space: nowrap;  
     font-size: 12px;  
     background-color: #fff;

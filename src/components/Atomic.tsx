@@ -4,6 +4,11 @@ import Carousel from 'nuka-carousel';
 export const CarouselContainer = styled(Carousel)` 
   position: relative;
   height: 96px;
+  width: 50%;
+   #slider-list {
+	width: 98%;
+  }
+.
 `;
 
 export const Icon = styled.div<{ hoverable?: boolean }>`
