@@ -8,7 +8,6 @@ export const CarouselContainer = styled(Carousel)`
    #slider-list {
 	width: 98%;
   }
-.
 `;
 
 export const Icon = styled.div<{ hoverable?: boolean }>`
