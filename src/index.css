@@ -58,31 +58,24 @@ html,body {
   align-items: center;
   position: absolute;
   padding-top: 52px;  
-  width: 100%;
-  position: absolute;
-  padding-top: 52px;  
-  width: 100%;
+  width: 100vw;
   left: 0px;
   bottom: 0px;
-  width: 100%;
-  position: absolute;
   background-color: rgb(255, 255, 255);
 }
 
 .animate-wrapper {
+  overflow: auto;
   overflow-y: scroll;
   height: 200px;
   flex: 1;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
   position: absolute;
-  top: 23%;
-  /* padding-top: 1px;   */
+  top: 21%;
   width: 100%;
   background-color: #fff;
-  /* background-color: #ededed; */
 }
 
 .animate-wrapper-2 {

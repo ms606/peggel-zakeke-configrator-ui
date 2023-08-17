@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import RoundedBorder from "../assets/icons/round-edges-solid.svg"; 
 
 export const List = styled.ul`
     margin: 0;
@@ -32,29 +33,43 @@ export const ListItem = styled.li<{ selected?: boolean }>`
     border: 1px #DDD none;
     cursor: pointer;
     margin: 0 10px;
-    // border-radius: ${props => props.selected ? '19px 19px 38px 0px' : '0px'};
     width: 12em;
     height: ${props => props.selected ? '3em' : '3em'};
     border-color: ${props => props.selected ? 'black' : '#DDD'};
     white-space: nowrap;
-   // background-color: ${props => props.selected && '#fff'};
+    z-index: 2;
+    position: relative;
     &:hover {
         background-color: #f3f45;        
     }
-    &:after {
-        content:${props => props.selected && 'aaa'}; 
-        width:  ${props => props.selected && '20px'}; 
-        height: ${props => props.selected && '10px'}; 
-       // background-color: ${props => props.selected && '#fff'}; 
-        position: absolute;        
-        }       
-    &:after {
-        z-index: 4444;
+    &:before {
+        position: absolute;
         content:''; 
-        width: 12em;
-        height: '10px'; 
-       // background-color: '#fff';
+        width: 14em;
+        background-image:  url();
+        height: 44px; 
         top: 3%;
+        z-index: -1;
+        border-radius: 64px 61px 12px 0px;
+        }           
+    // &:after {
+    //     content:${props => props.selected && 'aaa'}; 
+    //     width:  ${props => props.selected && '20px'}; 
+    //     height: ${props => props.selected && '10px'}; 
+    //     background-image: ${props => props.selected ? `url(${RoundedBorder})` : 'none'};             
+    //     position: absolute;        
+    //     z-index: -1;
+    //     }       
+    &:after {
+        position: absolute;
+        content:''; 
+        width: 14em;
+        background-image:  ${props => { console.log(props);
+            return props.selected === true ? `url(${RoundedBorder})` : ''
+                           }};
+        height: 44px;
+        top: 3%;
+        z-index: -1;
         border-radius: 64px 61px 12px 0px;
         }               
 `;
@@ -91,7 +106,7 @@ export const ListItemColor = styled.li<{ selected?: boolean, selectedColor?: any
     content: "${props => { return props.selected ? props.selectedColor : ''
                         }}";
     position: absolute;
-    bottom: -1%;    
+    top: 80%;    
     }
     
     @media screen and (max-width: 568px) {

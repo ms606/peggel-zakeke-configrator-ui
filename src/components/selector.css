@@ -40,7 +40,7 @@
     height: 60px;
     position: absolute;
     width: 100%;
-    top: 0.4em;
+    top: 0em;
     background-color: #ededed;
 
   } 
@@ -221,6 +221,18 @@
 .button-53:hover span {
   background: none;
 }
+
+.slider-container {
+	width: 90vw !important;
+  /* height: 80px; */
+  }
+
+.slider-list {
+	width: 90vw !important;
+  height: 80px;
+  position: relative;
+  justify-content: center;
+  }
 
 @media screen and (min-width: 768px) {
   .button-53 {
