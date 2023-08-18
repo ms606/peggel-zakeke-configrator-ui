@@ -223,16 +223,23 @@
 }
 
 .slider-container {
-	width: 90vw !important;
-  /* height: 80px; */
+	/* left: 3em; */
+  /* position: absolute; */
   }
 
 .slider-list {
-	width: 90vw !important;
-  height: 80px;
-  position: relative;
-  justify-content: center;
+  width: 90vw !important;
+  height: 80px; 
+  /* position: absolute; */
+  /* justify-content: center; */
   }
+
+.slider-frame {
+  left: 3em;
+  width: 90vw !important;
+  height: 80px; 
+  /* position: absolute; */
+}  
 
 @media screen and (min-width: 768px) {
   .button-53 {

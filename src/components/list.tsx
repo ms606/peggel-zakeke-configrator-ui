@@ -10,7 +10,7 @@ export const List = styled.ul`
     border-radius: 5px;
     white-space: nowrap;
     justify-content: center;
-    height: 3em;
+    height: 40px;
     background-color: #ddd;
     @media screen and (max-width: 568px) {
         width: 100vw;
@@ -32,9 +32,9 @@ export const ListItem = styled.li<{ selected?: boolean }>`
     padding: 0px 10px;
     border: 1px #DDD none;
     cursor: pointer;
-    margin: 0 10px;
+    margin: 0 3px;
     width: 12em;
-    height: ${props => props.selected ? '3em' : '3em'};
+    height: ${props => props.selected ? '40px' : '40px'};
     border-color: ${props => props.selected ? 'black' : '#DDD'};
     white-space: nowrap;
     z-index: 2;
@@ -47,7 +47,7 @@ export const ListItem = styled.li<{ selected?: boolean }>`
         content:''; 
         width: 14em;
         background-image:  url();
-        height: 44px; 
+        height: 40px; 
         top: 3%;
         z-index: -1;
         border-radius: 64px 61px 12px 0px;
@@ -63,12 +63,12 @@ export const ListItem = styled.li<{ selected?: boolean }>`
     &:after {
         position: absolute;
         content:''; 
-        width: 14em;
+        width: 15.1em;
         background-image:  ${props => { console.log(props);
             return props.selected === true ? `url(${RoundedBorder})` : ''
                            }};
-        height: 44px;
-        top: 3%;
+        height: 43px;
+        top: 0%;
         z-index: -1;
         border-radius: 64px 61px 12px 0px;
         }               
@@ -82,7 +82,7 @@ export const ListItemColor = styled.li<{ selected?: boolean, selectedColor?: any
     justify-content: center;
     padding: 0px 10px;
     cursor: pointer;
-    margin: 0 11px;
+    margin: 0 3px;
     border-radius: 100%;
     width: 5.5em;
     height: 5.1em;

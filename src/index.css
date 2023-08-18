@@ -60,13 +60,13 @@ html,body {
   padding-top: 52px;  
   width: 100vw;
   left: 0px;
-  bottom: 0px;
+  bottom: 10px;
   background-color: rgb(255, 255, 255);
 }
 
 .animate-wrapper {
-  overflow: auto;
-  overflow-y: scroll;
+  overflow: hidden;
+  /* overflow-y: scroll; */
   height: 200px;
   flex: 1;
   display: flex;

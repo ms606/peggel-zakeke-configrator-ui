@@ -125,7 +125,7 @@ const App: FunctionComponent<{}> = () => {
                   style={
                     selectedTrayPreviewOpenButton3D
                       ? { width: "60vw", height: "60vh" }
-                      : { width: "70vw", height: "70vh" }
+                      : { width: "73vw", height: "73vh" }
                   }
                 >
                   <ZakekeViewer />

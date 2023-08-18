@@ -204,9 +204,12 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   }, [selectedGroupId]);
 
   const [selectedCarouselSlide, setSelectedCarouselSlide] = useState<number>(0);
+  const slidesToShow = window.innerWidth <= 850 ? 9 : 10;
 
   const handleAfterSlide = (currentSlide: any) => {
+
     console.log("Now viewing slide:", currentSlide);
+    // setSelectedCarouselSlide(currentSlide);
   };
   console.log(selectedCarouselSlide, "selectedCarouselSlide");
 
@@ -281,14 +284,10 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     selectGroupIdFromTray(filteredArray[0].id);
   };
 
-  const togglePersonalize = () => {
-    setSelectedPersonalize(!selectedPersonalize);
-  };
-
   const containerStyles = {
     overflow: "auto",
     width: "100%",
-    height: !selectedTrayPreviewOpenButton ? "230px" : "70px",
+    height: "180px" ,
   };
 
 
@@ -303,7 +302,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
               style={{
                 display: "flex",
                 width: "420px",
-                top: "50%",
+                top: "43%",
                 left: "50%",
                 height: "auto",
                 margin: "0px auto",
@@ -422,10 +421,9 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                   {attributes &&
                     !isTrayOpen &&
                     attributes.map((attribute) => {
-                      //   console.log(groups);
+                      // console.log(groups);
                       // console.log(rightFootStrapOption1, attribute.name, 'ddddd',rightFootStrapOption1?.match(/\d+/)[0],  attribute.name?.match(/\d+/)[0]  );
                       //console.log(selectedAttribute === attribute, 'selectedAttribute === attribute');
-                      
                       if (attribute.enabled === true) {
                         return (
                           <div
@@ -451,6 +449,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
                 <div
                   style={{
+                    // position: "relative",
                     backgroundColor: "#fff",
                     display: "flex",
                     justifyContent: "center",
@@ -466,46 +465,51 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                       selectedAttribute &&
                       !isTrayOpen &&
                       <NukaCarousel
-                              // className={"width: 70vw"}
-                              slideWidth="1"
-                              slidesToScroll={1}
-                              speed={500}
-                              slidesToShow={4}
-                              // currentSlide={2}
-                              //slidesToShow={window.innerWidth <= 1600 ? 3 : 4}
-                              slideIndex={selectedCarouselSlide}
-                              afterSlide={handleAfterSlide}
-                              //afterSlide={console.log(currentSlide)}
-                              renderBottomCenterControls={() => <span />}
-                              renderCenterRightControls={() => {
-                                // if (
-                                //   selectedCarouselSlide !==
-                                //   (selectedAttribute.options.length - 4 > 0
-                                //     ? selectedAttribute.options.length - 4
-                                //     : selectedCarouselSlide)
-                                // )
-                                  return (
-                                    <ArrowRight onClick={() => setSelectedCarouselSlide(selectedCarouselSlide + 1)}>
-                                      <ArrowRightIconStyled>
-                                        <ArrowRightIcon />
-                                      </ArrowRightIconStyled>
-                                    </ArrowRight>
-                                  );
-                              }}
-                              renderCenterLeftControls={() => {
-                                // if (selectedCarouselSlide !== 0)
-                                  return (
-                                    <ArrowLeft onClick={() => setSelectedCarouselSlide(selectedCarouselSlide - 1)}>
-                                      <ArrowLeftIconStyled>
-                                        <ArrowLeftIcon />
-                                      </ArrowLeftIconStyled>
-                                    </ArrowLeft>
-                                  );
-                              }}  
-
-                            >
-
-                           {selectedAttribute.options.map((option) => (
+                        slideWidth="1"
+                        // slideAlignment="center"
+                        slidesToScroll={1}
+                        speed={500}
+                        slidesToShow={1}
+                        //slidesToShow={window.innerWidth <= 1600 ? 3 : 4}
+                        slideIndex={selectedCarouselSlide}
+                        // afterSlide={setSelectedCarouselSlide}
+                        // afterSlide={handleAfterSlide}
+                        //afterSlide={console.log(currentSlide)}
+                        renderBottomCenterControls={() => <span />}
+                        renderCenterRightControls={() => {
+                          // console.log(selectedAttribute.options,'selectedAttribute.options');
+                          
+                          if (selectedAttribute.options.length <= slidesToShow )
+                            return (
+                              <></>
+                          )    
+                          if (
+                            selectedCarouselSlide !==
+                            (selectedAttribute.options.length - 4 > 0
+                              ? selectedAttribute.options.length - 4
+                              : selectedCarouselSlide)
+                          )
+                            return (
+                              <ArrowRight onClick={() => setSelectedCarouselSlide(selectedCarouselSlide + 1)}>
+                                <ArrowRightIconStyled>
+                                  <ArrowRightIcon />
+                                </ArrowRightIconStyled>
+                              </ArrowRight>
+                            );
+                        }}
+                        renderCenterLeftControls={() => {
+                            if (selectedCarouselSlide !== 0)
+                            return (
+                              <ArrowLeft onClick={() => setSelectedCarouselSlide(selectedCarouselSlide - 1)}>
+                                <ArrowLeftIconStyled>
+                                  <ArrowLeftIcon />
+                                </ArrowLeftIconStyled>
+                              </ArrowLeft>
+                            );
+                        }}  
+                      >
+                       {selectedAttribute.options.map((option) => (
+                            
                            <ListItemColor
                                     key={option.id}
                                     onClick={() => {

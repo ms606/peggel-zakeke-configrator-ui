@@ -185,11 +185,12 @@ const ArrowCss = css`
 
 export const ArrowLeft = styled.div`
 	${ArrowCss};
+	left: -2em;
 `;
 export const ArrowRight = styled.div`
 	${ArrowCss};
 	left: auto;
-	right: 10px;
+	right: -6em;
 `;
 
 export const ArrowLeftIconStyled = styled(Icon)`
