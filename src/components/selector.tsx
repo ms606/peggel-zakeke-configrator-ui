@@ -22,6 +22,9 @@ import {
 } from "./Atomic";
 import { ReactComponent as ArrowRightIcon } from "../assets/icons/arrow-right-solid.svg";
 import { ReactComponent as ArrowLeftIcon } from "../assets/icons/arrow-left-solid.svg";
+import { ReactComponent as ТrаыHeaderArrowRightIcon} from "../assets/icons/tray-header-arrow-right.svg";
+import { ReactComponent as ТrаыHeaderArrowLeftIcon} from "../assets/icons/tray-header-arrow-left.svg";
+
 import NukaCarousel from "nuka-carousel";
 
 const dialogsPortal = document.getElementById("dialogs-portal")!;
@@ -181,23 +184,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     if (selectedGroup) {
       const camera = selectedGroup.cameraLocationId;
       if (camera) setCamera(camera);
-
-      //     console.log(items[0]?.guid,groups);
-
-      //     // push text into zakeke component
-      //   const item  = {
-      //     // guid: items[0]?.guid,
-      //     text: 'heheheheheheh',
-      //     // text: T._("Text", "Composer"),
-      //     // fillColor: defaultColor,
-      //     fontFamily: fonts[0].name,
-      //     // fontSize: 48,
-      //     // fontWeight: 'normal normal',
-      //     // isTextOnPath: false,
-      //     // constraints: null,
-      // }
-
-      //    addItemText(item, 345656)
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -315,26 +301,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                 onClick={handleLeftClick}
               >
                 <div className="mc-prev">
-                  <svg
-                    aria-hidden="true"
-                    focusable="false"
-                    viewBox="0 0 48 24"
-                    role="img"
-                    width="48px"
-                    height="24px"
-                    fill="none"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      d="M7,18 L1,12 L7,6"
-                    ></path>
-                    <path
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      d="M15,18 L9,12 L15,6"
-                    ></path>
-                  </svg>
+                <ТrаыHeaderArrowLeftIcon />  
                 </div>
               </button>
 
@@ -362,26 +329,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                 </div>
               </div>
               <button className="next-customization" onClick={handleRightClick}>
-                <svg
-                  aria-hidden="true"
-                  focusable="false"
-                  viewBox="0 0 32 24"
-                  role="img"
-                  width="32px"
-                  height="24px"
-                  fill="none"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    d="M1,6 L7,12 L1,18"
-                  ></path>
-                  <path
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    d="M9,6 L15,12 L9,18"
-                  ></path>
-                </svg>
+               <ТrаыHeaderArrowRightIcon />               
               </button>
             </div>
 
