@@ -135,7 +135,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   // Open the first group and the first step when loaded
   useEffect(() => {
     if (!selectedGroup && groups.length > 0) {
-      console.log("items", items, "groups", groups, "product", product);
+      //  console.log("items", items, "groups", groups, "product", product);
 
       selectGroup(groups[0].id);
 
@@ -205,9 +205,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
   const [selectedCarouselSlide, setSelectedCarouselSlide] = useState<number>(0);
   const slidesToShow = window.innerWidth <= 850 ? 9 : 10;
-
+  // const carouselClass = slides.length <= 7 ? 'small-slider' : 'large-slider';
   const handleAfterSlide = (currentSlide: any) => {
-
     console.log("Now viewing slide:", currentSlide);
     // setSelectedCarouselSlide(currentSlide);
   };
@@ -287,9 +286,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   const containerStyles = {
     overflow: "auto",
     width: "100%",
-    height: "180px" ,
+    height: "180px",
   };
-
 
   return (
     <>
@@ -434,8 +432,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                               key={attribute.id}
                               selected={selectedAttribute === attribute}
                               onClick={() => {
-                                selectAttribute(attribute.id)
-                                setSelectedCarouselSlide(0)
+                                selectAttribute(attribute.id);
+                                setSelectedCarouselSlide(0);
                               }}
                             >
                               {attribute.enabled === true && attribute.name}
@@ -447,6 +445,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                 </List>
                 <br />
 
+                {selectedAttribute && selectedAttribute.options.length <= 16 && (    
                 <div
                   style={{
                     // position: "relative",
@@ -456,86 +455,198 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     alignItems: "center",
                     height: "9vh",
                     width: "90vw",
-                    paddingLeft: "5em"
+                    paddingLeft: "5em",
                     // margin: "0px 19em"
                   }}
                 >
-                  <List style={{ backgroundColor: "#fff", height: "80px"}}>
+                  <List style={{ backgroundColor: "#fff", height: "80px" }}>
                     {!selectedTrayPreviewOpenButton &&
                       selectedAttribute &&
-                      !isTrayOpen &&
-                      <NukaCarousel
-                        slideWidth="1"
-                        // slideAlignment="center"
-                        slidesToScroll={1}
-                        speed={500}
-                        slidesToShow={1}
-                        //slidesToShow={window.innerWidth <= 1600 ? 3 : 4}
-                        slideIndex={selectedCarouselSlide}
-                        // afterSlide={setSelectedCarouselSlide}
-                        // afterSlide={handleAfterSlide}
-                        //afterSlide={console.log(currentSlide)}
-                        renderBottomCenterControls={() => <span />}
-                        renderCenterRightControls={() => {
-                          // console.log(selectedAttribute.options,'selectedAttribute.options');
-                          
-                          if (selectedAttribute.options.length <= slidesToShow )
-                            return (
-                              <></>
-                          )    
-                          if (
-                            selectedCarouselSlide !==
-                            (selectedAttribute.options.length - 4 > 0
-                              ? selectedAttribute.options.length - 4
-                              : selectedCarouselSlide)
-                          )
-                            return (
-                              <ArrowRight onClick={() => setSelectedCarouselSlide(selectedCarouselSlide + 1)}>
-                                <ArrowRightIconStyled>
-                                  <ArrowRightIcon />
-                                </ArrowRightIconStyled>
-                              </ArrowRight>
-                            );
-                        }}
-                        renderCenterLeftControls={() => {
+                      !isTrayOpen && (
+                        <NukaCarousel
+                          slideWidth="1"
+                          slidesToScroll={1}
+                          speed={500}
+                          slidesToShow={1}
+                          //slidesToShow={window.innerWidth <= 1600 ? 3 : 4}
+                          slideIndex={selectedCarouselSlide}
+                          // afterSlide={setSelectedCarouselSlide}
+                          // afterSlide={handleAfterSlide}
+                          //afterSlide={console.log(currentSlide)}
+                          renderBottomCenterControls={() => <span />}
+                          renderCenterRightControls={() => {
+                            // console.log(selectedAttribute.options,'selectedAttribute.options');
+                            if (selectedAttribute.options.length <= 15)
+                              return <></>;
+                            if (
+                              selectedAttribute.options.length <= slidesToShow
+                            )
+                              return <></>;
+                            if (
+                              selectedCarouselSlide !==
+                              (selectedAttribute.options.length - 4 > 0
+                                ? selectedAttribute.options.length - 4
+                                : selectedCarouselSlide)
+                            )
+                              return (
+                                <ArrowRight
+                                  onClick={() =>
+                                    setSelectedCarouselSlide(
+                                      selectedCarouselSlide + 1
+                                    )
+                                  }
+                                >
+                                  <ArrowRightIconStyled>
+                                    <ArrowRightIcon />
+                                  </ArrowRightIconStyled>
+                                </ArrowRight>
+                              );
+                          }}
+                          renderCenterLeftControls={() => {
                             if (selectedCarouselSlide !== 0)
-                            return (
-                              <ArrowLeft onClick={() => setSelectedCarouselSlide(selectedCarouselSlide - 1)}>
-                                <ArrowLeftIconStyled>
-                                  <ArrowLeftIcon />
-                                </ArrowLeftIconStyled>
-                              </ArrowLeft>
-                            );
-                        }}  
-                      >
-                       {selectedAttribute.options.map((option) => (
-                            
-                           <ListItemColor
-                                    key={option.id}
-                                    onClick={() => {
-                                      selectOption(option.id);
-                                    }}
-                                    selected={option.selected}
-                                    selectedColor={selectedColorName}
-                                  >
-                                    {option.imageUrl && (
-                                      <ListItemImage
-                                        src={option.imageUrl}
-                                        onClick={() => selectColorName(option.name)}
-                                        selected={option.selected}
-                                      />
-                                    )}
-                                  </ListItemColor>
+                              return (
+                                <ArrowLeft
+                                  onClick={() =>
+                                    setSelectedCarouselSlide(
+                                      selectedCarouselSlide - 1
+                                    )
+                                  }
+                                >
+                                  <ArrowLeftIconStyled>
+                                    <ArrowLeftIcon />
+                                  </ArrowLeftIconStyled>
+                                </ArrowLeft>
+                              );
+                          }}
+                        >
+                        <div style={{display: "flex", justifyContent: "center"}}>
+                        {selectedAttribute.options.map((option) => (
+                            <ListItemColor
+                              key={option.id}
+                              onClick={() => {
+                                selectOption(option.id);
+                              }}
+                              selected={option.selected}
+                              selectedColor={selectedColorName}
+                            >
+                              {option.imageUrl && (
+                                <ListItemImage
+                                  src={option.imageUrl}
+                                  onClick={() => selectColorName(option.name)}
+                                  selected={option.selected}
+                                />
+                              )}
+                            </ListItemColor>
+                          ))}
+                        </div>  
+                        
+                        </NukaCarousel>
+                      )}
 
-                         ))}
-                            
-                      </NukaCarousel>
-
-                    } 
-                      
                     {/* {selectedColorName}   */}
                   </List>
                 </div>
+              )}
+
+                {/* NUKA CAROUSEL WHICH IS GREATER THAN 16 slides  */}
+
+                {selectedAttribute && selectedAttribute.options.length >= 16 && (
+                  <div
+                    style={{
+                      backgroundColor: "#fff",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      height: "9vh",
+                      width: "90vw",
+                      paddingLeft: "5em",
+                    }}
+                  >
+                    <List style={{ backgroundColor: "#fff", height: "80px" }}>
+                      {!selectedTrayPreviewOpenButton &&
+                        selectedAttribute &&
+                        !isTrayOpen && (
+                          <NukaCarousel
+                            slideWidth="1"
+                            slidesToScroll={1}
+                            speed={500}
+                            slidesToShow={1}
+                            //slidesToShow={window.innerWidth <= 1600 ? 3 : 4}
+                            slideIndex={selectedCarouselSlide}
+                            // afterSlide={setSelectedCarouselSlide}
+                            // afterSlide={handleAfterSlide}
+                            //afterSlide={console.log(currentSlide)}
+                            renderBottomCenterControls={() => <span />}
+                            renderCenterRightControls={() => {
+                              // console.log(selectedAttribute.options,'selectedAttribute.options');
+                              if (selectedAttribute.options.length <= 15)
+                                return <></>;
+                              if (
+                                selectedAttribute.options.length <= slidesToShow
+                              )
+                                return <></>;
+                              if (
+                                selectedCarouselSlide !==
+                                (selectedAttribute.options.length - 4 > 0
+                                  ? selectedAttribute.options.length - 4
+                                  : selectedCarouselSlide)
+                              )
+                                return (
+                                  <ArrowRight
+                                    onClick={() =>
+                                      setSelectedCarouselSlide(
+                                        selectedCarouselSlide + 1
+                                      )
+                                    }
+                                  >
+                                    <ArrowRightIconStyled>
+                                      <ArrowRightIcon />
+                                    </ArrowRightIconStyled>
+                                  </ArrowRight>
+                                );
+                            }}
+                            renderCenterLeftControls={() => {
+                              if (selectedCarouselSlide !== 0)
+                                return (
+                                  <ArrowLeft
+                                    onClick={() =>
+                                      setSelectedCarouselSlide(
+                                        selectedCarouselSlide - 1
+                                      )
+                                    }
+                                  >
+                                    <ArrowLeftIconStyled>
+                                      <ArrowLeftIcon />
+                                    </ArrowLeftIconStyled>
+                                  </ArrowLeft>
+                                );
+                            }}
+                          >
+                            {selectedAttribute.options.map((option) => (
+                              <ListItemColor
+                                key={option.id}
+                                onClick={() => {
+                                  selectOption(option.id);
+                                }}
+                                selected={option.selected}
+                                selectedColor={selectedColorName}
+                              >
+                                {option.imageUrl && (
+                                  <ListItemImage
+                                    src={option.imageUrl}
+                                    onClick={() => selectColorName(option.name)}
+                                    selected={option.selected}
+                                  />
+                                )}
+                              </ListItemColor>
+                            ))}
+                          </NukaCarousel>
+                        )}
+
+                      {/* {selectedColorName}   */}
+                    </List>
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -547,53 +658,47 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
 export default Selector;
 
-
-
-
-
-
-
 // selectedAttribute.options.map((option) => {
-                      //      console.log(option, 'opotion');
+//      console.log(option, 'opotion');
 
-                      //   return (
-                      //     // <div
-                      //     //   style={{
-                      //     //     backgroundColor: "#fff",
-                      //     //     height: "80px",
-                      //     //     // width: "100vw"
-                      //     //   }}
-                      //     // >
-                      //       <NukaCarousel
-                      //         slideWidth="0.5"
-                      //         slidesToScroll={1}
-                      //         speed={50}
-                      //         slidesToShow={3}
-                      //         // slidesToShow={window.innerWidth <= 1600 ? 3 : 4}
-                      //         slideIndex={selectedCarouselSlide}
-                      //         afterSlide={handleAfterSlide}
-                      //         //afterSlide={console.log(currentSlide)}
-                      //         renderBottomCenterControls={() => <span />}
-                      //       >
-                      //         <ListItemColor
-                      //           key={option.id}
-                      //           onClick={() => {
-                      //             selectOption(option.id);
-                      //           }}
-                      //           selected={option.selected}
-                      //           selectedColor={selectedColorName}
-                      //         >
-                      //           {option.imageUrl && (
-                      //             <ListItemImage
-                      //               src={option.imageUrl}
-                      //               onClick={() => selectColorName(option.name)}
-                      //               selected={option.selected}
-                      //             />
-                      //           )}
-                      //         </ListItemColor>
-                      //       </NukaCarousel>
-                      //     // </div>
-                      //   );
-                      // })
-                      
-                      //}
+//   return (
+//     // <div
+//     //   style={{
+//     //     backgroundColor: "#fff",
+//     //     height: "80px",
+//     //     // width: "100vw"
+//     //   }}
+//     // >
+//       <NukaCarousel
+//         slideWidth="0.5"
+//         slidesToScroll={1}
+//         speed={50}
+//         slidesToShow={3}
+//         // slidesToShow={window.innerWidth <= 1600 ? 3 : 4}
+//         slideIndex={selectedCarouselSlide}
+//         afterSlide={handleAfterSlide}
+//         //afterSlide={console.log(currentSlide)}
+//         renderBottomCenterControls={() => <span />}
+//       >
+//         <ListItemColor
+//           key={option.id}
+//           onClick={() => {
+//             selectOption(option.id);
+//           }}
+//           selected={option.selected}
+//           selectedColor={selectedColorName}
+//         >
+//           {option.imageUrl && (
+//             <ListItemImage
+//               src={option.imageUrl}
+//               onClick={() => selectColorName(option.name)}
+//               selected={option.selected}
+//             />
+//           )}
+//         </ListItemColor>
+//       </NukaCarousel>
+//     // </div>
+//   );
+// })
+
+//}

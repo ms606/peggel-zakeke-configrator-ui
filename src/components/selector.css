@@ -230,9 +230,14 @@
 .slider-list {
   width: 90vw !important;
   height: 80px; 
+  text-align: center;
   /* position: absolute; */
   /* justify-content: center; */
   }
+
+.slide {
+  width: 90vw;
+}
 
 .slider-frame {
   left: 3em;
