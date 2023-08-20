@@ -190,13 +190,14 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   }, [selectedGroupId]);
 
   const [selectedCarouselSlide, setSelectedCarouselSlide] = useState<number>(0);
-  const slidesToShow = window.innerWidth <= 850 ? 9 : 10;
+  const slidesToShow = window.innerWidth / 89 ;
+
   // const carouselClass = slides.length <= 7 ? 'small-slider' : 'large-slider';
   const handleAfterSlide = (currentSlide: any) => {
     console.log("Now viewing slide:", currentSlide);
     // setSelectedCarouselSlide(currentSlide);
   };
-  console.log(selectedCarouselSlide, "selectedCarouselSlide");
+  console.log(slidesToShow, "selectedCarouselSlide");
 
   if (isSceneLoading || !groups || groups.length === 0)
     return (
@@ -393,7 +394,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                 </List>
                 <br />
 
-                {selectedAttribute && selectedAttribute.options.length <= 16 && (    
+                {selectedAttribute && selectedAttribute.options.length <= slidesToShow && (    
                 <div
                   style={{
                     // position: "relative",
@@ -423,7 +424,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                           //afterSlide={console.log(currentSlide)}
                           renderBottomCenterControls={() => <span />}
                           renderCenterRightControls={() => {
-                            // console.log(selectedAttribute.options,'selectedAttribute.options');
                             if (selectedAttribute.options.length <= 15)
                               return <></>;
                             if (
@@ -432,8 +432,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                               return <></>;
                             if (
                               selectedCarouselSlide !==
-                              (selectedAttribute.options.length - 4 > 0
-                                ? selectedAttribute.options.length - 4
+                              (selectedAttribute.options.length - slidesToShow > 0
+                                ? selectedAttribute.options.length - slidesToShow
                                 : selectedCarouselSlide)
                             )
                               return (
@@ -498,7 +498,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
                 {/* NUKA CAROUSEL WHICH IS GREATER THAN 16 slides  */}
 
-                {selectedAttribute && selectedAttribute.options.length >= 16 && (
+                {selectedAttribute && selectedAttribute.options.length >= slidesToShow && (
                   <div
                     style={{
                       backgroundColor: "#fff",
@@ -517,17 +517,17 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                           <NukaCarousel
                             slideWidth="1"
                             slidesToScroll={1}
-                            speed={500}
-                            slidesToShow={1}
+                            speed={50}
+                            slidesToShow={slidesToShow}
                             //slidesToShow={window.innerWidth <= 1600 ? 3 : 4}
                             slideIndex={selectedCarouselSlide}
-                            // afterSlide={setSelectedCarouselSlide}
+                            //afterSlide={setSelectedCarouselSlide}
                             // afterSlide={handleAfterSlide}
                             //afterSlide={console.log(currentSlide)}
                             renderBottomCenterControls={() => <span />}
                             renderCenterRightControls={() => {
                               // console.log(selectedAttribute.options,'selectedAttribute.options');
-                              if (selectedAttribute.options.length <= 15)
+                              if (selectedAttribute.options.length <= slidesToShow)
                                 return <></>;
                               if (
                                 selectedAttribute.options.length <= slidesToShow
@@ -535,8 +535,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                                 return <></>;
                               if (
                                 selectedCarouselSlide !==
-                                (selectedAttribute.options.length - 4 > 0
-                                  ? selectedAttribute.options.length - 4
+                                (selectedAttribute.options.length - slidesToShow > 0
+                                  ? selectedAttribute.options.length - slidesToShow
                                   : selectedCarouselSlide)
                               )
                                 return (

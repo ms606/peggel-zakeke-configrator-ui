@@ -191,6 +191,9 @@ export const ArrowRight = styled.div`
 	${ArrowCss};
 	left: auto;
 	right: -6em;
+	@media screen and (max-width: 568px) {
+      right: 0em;
+        } 
 `;
 
 export const ArrowLeftIconStyled = styled(Icon)`

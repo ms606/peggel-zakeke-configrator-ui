@@ -231,12 +231,13 @@
   width: 90vw !important;
   height: 80px; 
   text-align: center;
+  /* transform: translateX(calc(-66.6667% - 0px)); */
   /* position: absolute; */
   /* justify-content: center; */
   }
 
 .slide {
-  width: 90vw;
+  /* width: 90vw; */
 }
 
 .slider-frame {
@@ -282,5 +283,9 @@
     text-overflow: ellipsis;
     overflow: hidden;
   }
+
+  .slider-frame {
+    left: 0em;
+  }  
   
 }

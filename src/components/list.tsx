@@ -15,9 +15,9 @@ export const List = styled.ul`
     @media screen and (max-width: 568px) {
         width: 100vw;
         transform-origin: 50% 50% 0px;
-        transform: translate3d(-186.507px, 0px, 0px) scale(1, 1);
+        // transform: translate3d(-186.507px, 0px, 0px) scale(1, 1);
         position: relative;
-        left: 60vw;
+        // left: 33vw;
         } 
 `;
 
