@@ -190,7 +190,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   }, [selectedGroupId]);
 
   const [selectedCarouselSlide, setSelectedCarouselSlide] = useState<number>(0);
-  const slidesToShow = window.innerWidth / 89 ;
+  const slidesToShow = Math.floor(window.innerWidth / 81);
 
   // const carouselClass = slides.length <= 7 ? 'small-slider' : 'large-slider';
   const handleAfterSlide = (currentSlide: any) => {
@@ -394,7 +394,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                 </List>
                 <br />
 
-                {selectedAttribute && selectedAttribute.options.length <= slidesToShow && (    
+                {selectedAttribute && selectedAttribute.options.length < slidesToShow && (    
                 <div
                   style={{
                     // position: "relative",
@@ -402,7 +402,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    height: "9vh",
+                    height: "13vh",
                     width: "90vw",
                     paddingLeft: "5em",
                     // margin: "0px 19em"
@@ -412,61 +412,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     {!selectedTrayPreviewOpenButton &&
                       selectedAttribute &&
                       !isTrayOpen && (
-                        <NukaCarousel
-                          slideWidth="1"
-                          slidesToScroll={1}
-                          speed={500}
-                          slidesToShow={1}
-                          //slidesToShow={window.innerWidth <= 1600 ? 3 : 4}
-                          slideIndex={selectedCarouselSlide}
-                          // afterSlide={setSelectedCarouselSlide}
-                          // afterSlide={handleAfterSlide}
-                          //afterSlide={console.log(currentSlide)}
-                          renderBottomCenterControls={() => <span />}
-                          renderCenterRightControls={() => {
-                            if (selectedAttribute.options.length <= 15)
-                              return <></>;
-                            if (
-                              selectedAttribute.options.length <= slidesToShow
-                            )
-                              return <></>;
-                            if (
-                              selectedCarouselSlide !==
-                              (selectedAttribute.options.length - slidesToShow > 0
-                                ? selectedAttribute.options.length - slidesToShow
-                                : selectedCarouselSlide)
-                            )
-                              return (
-                                <ArrowRight
-                                  onClick={() =>
-                                    setSelectedCarouselSlide(
-                                      selectedCarouselSlide + 1
-                                    )
-                                  }
-                                >
-                                  <ArrowRightIconStyled>
-                                    <ArrowRightIcon />
-                                  </ArrowRightIconStyled>
-                                </ArrowRight>
-                              );
-                          }}
-                          renderCenterLeftControls={() => {
-                            if (selectedCarouselSlide !== 0)
-                              return (
-                                <ArrowLeft
-                                  onClick={() =>
-                                    setSelectedCarouselSlide(
-                                      selectedCarouselSlide - 1
-                                    )
-                                  }
-                                >
-                                  <ArrowLeftIconStyled>
-                                    <ArrowLeftIcon />
-                                  </ArrowLeftIconStyled>
-                                </ArrowLeft>
-                              );
-                          }}
-                        >
+                        
                         <div style={{display: "flex", justifyContent: "center"}}>
                         {selectedAttribute.options.map((option) => (
                             <ListItemColor
@@ -486,9 +432,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                               )}
                             </ListItemColor>
                           ))}
-                        </div>  
-                        
-                        </NukaCarousel>
+                        </div>                                                
                       )}
 
                     {/* {selectedColorName}   */}
@@ -505,7 +449,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
-                      height: "9vh",
+                      height: "13vh",
                       width: "90vw",
                       paddingLeft: "5em",
                     }}
@@ -515,29 +459,34 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                         selectedAttribute &&
                         !isTrayOpen && (
                           <NukaCarousel
-                            slideWidth="1"
-                            slidesToScroll={1}
-                            speed={50}
-                            slidesToShow={slidesToShow}
-                            //slidesToShow={window.innerWidth <= 1600 ? 3 : 4}
+                            slideWidth="220px"
+                            slidesToScroll={5}
+                            speed={10}
+                            slidesToShow={slidesToShow+2}
+                           
                             slideIndex={selectedCarouselSlide}
                             //afterSlide={setSelectedCarouselSlide}
-                            // afterSlide={handleAfterSlide}
+                            afterSlide={handleAfterSlide}
                             //afterSlide={console.log(currentSlide)}
                             renderBottomCenterControls={() => <span />}
                             renderCenterRightControls={() => {
                               // console.log(selectedAttribute.options,'selectedAttribute.options');
-                              if (selectedAttribute.options.length <= slidesToShow)
-                                return <></>;
+                              // if (selectedAttribute.options.length <= slidesToShow)
+                              //   return <></>;
+                              // if (
+                              //   selectedAttribute.options.length <= slidesToShow
+                              // )
+                              //  return <></>;
+                              console.log(selectedCarouselSlide, selectedAttribute.options.length, 
+                                  slidesToShow
+                                );
+                              
                               if (
-                                selectedAttribute.options.length <= slidesToShow
-                              )
-                                return <></>;
-                              if (
-                                selectedCarouselSlide !==
-                                (selectedAttribute.options.length - slidesToShow > 0
-                                  ? selectedAttribute.options.length - slidesToShow
-                                  : selectedCarouselSlide)
+                                // selectedCarouselSlide !==
+                                // (
+                                  selectedAttribute.options.length - slidesToShow > 0
+                                  // ? selectedAttribute.options.length - slidesToShow
+                                  // /: selectedCarouselSlide)
                               )
                                 return (
                                   <ArrowRight
@@ -571,22 +520,25 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                             }}
                           >
                             {selectedAttribute.options.map((option) => (
-                              <ListItemColor
-                                key={option.id}
-                                onClick={() => {
-                                  selectOption(option.id);
-                                }}
-                                selected={option.selected}
-                                selectedColor={selectedColorName}
-                              >
-                                {option.imageUrl && (
-                                  <ListItemImage
-                                    src={option.imageUrl}
-                                    onClick={() => selectColorName(option.name)}
-                                    selected={option.selected}
-                                  />
-                                )}
-                              </ListItemColor>
+                              <>
+                                <ListItemColor
+                                  key={option.id}
+                                  onClick={() => {
+                                    selectOption(option.id);
+                                  }}
+                                  selected={option.selected}
+                                  selectedColor={selectedColorName}
+                                >
+                                  {option.imageUrl && (
+                                    <ListItemImage
+                                      src={option.imageUrl}
+                                      onClick={() => selectColorName(option.name)}
+                                      selected={option.selected}
+                                    />
+                                  )}
+                                </ListItemColor>
+                              </>
+                              
                             ))}
                           </NukaCarousel>
                         )}
@@ -605,48 +557,3 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 };
 
 export default Selector;
-
-// selectedAttribute.options.map((option) => {
-//      console.log(option, 'opotion');
-
-//   return (
-//     // <div
-//     //   style={{
-//     //     backgroundColor: "#fff",
-//     //     height: "80px",
-//     //     // width: "100vw"
-//     //   }}
-//     // >
-//       <NukaCarousel
-//         slideWidth="0.5"
-//         slidesToScroll={1}
-//         speed={50}
-//         slidesToShow={3}
-//         // slidesToShow={window.innerWidth <= 1600 ? 3 : 4}
-//         slideIndex={selectedCarouselSlide}
-//         afterSlide={handleAfterSlide}
-//         //afterSlide={console.log(currentSlide)}
-//         renderBottomCenterControls={() => <span />}
-//       >
-//         <ListItemColor
-//           key={option.id}
-//           onClick={() => {
-//             selectOption(option.id);
-//           }}
-//           selected={option.selected}
-//           selectedColor={selectedColorName}
-//         >
-//           {option.imageUrl && (
-//             <ListItemImage
-//               src={option.imageUrl}
-//               onClick={() => selectColorName(option.name)}
-//               selected={option.selected}
-//             />
-//           )}
-//         </ListItemColor>
-//       </NukaCarousel>
-//     // </div>
-//   );
-// })
-
-//}
