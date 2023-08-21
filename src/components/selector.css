@@ -254,7 +254,7 @@
 
 .swiper {
   width: 80vw !important;
-  height: 95% !important;
+  height: 95% !important  ;
 }
 .swiper-container{
   width: 90vw;
@@ -269,22 +269,22 @@
 
 .swiper-button-next {
   color:rgb(5, 6, 45) !important;
-  font-size: 20px !important;
-  height: 22px !important;
+  font-size: 15px !important;
+  height: 15px !important;
   left: 13.1  em !important;
 
   &:after {
-    font-size: 20px !important;
+    font-size: 15px !important;
   } 
 }
 
 .swiper-button-prev {
  color: black !important;
- font-size: 20px !important;
- height: 22px !important;
+ font-size: 15px !important;
+ height: 15px !important;
  
  &:after {
-  font-size: 20px !important;
+  font-size: 15px !important;
  } 
 }
 
