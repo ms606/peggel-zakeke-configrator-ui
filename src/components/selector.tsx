@@ -194,9 +194,9 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
   // const carouselClass = slides.length <= 7 ? 'small-slider' : 'large-slider';
   const handleAfterSlide = (currentSlide: any) => {
-    console.log("Now viewing slide:", currentSlide);
+    console.log("Now viewing slide:", currentSlide, currentSlide.typeof);
     setSelectedCarouselSlide(currentSlide);
-    console.log("Now SelectedCarouselSlide:", selectedCarouselSlide);
+    console.log("Now SelectedCarouselSlide:", setSelectedCarouselSlide(currentSlide));
   };
   // console.log(slidesToShow, "selectedCarouselSlide");
 
@@ -467,7 +467,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                            
                             slideIndex={selectedCarouselSlide}
                             //afterSlide={setSelectedCarouselSlide}
-                            // afterSlide={handleAfterSlide}
+                            afterSlide={handleAfterSlide}
                             //afterSlide={console.log(currentSlide)}
                             renderBottomCenterControls={() => <span />}
                             renderCenterRightControls={() => {
