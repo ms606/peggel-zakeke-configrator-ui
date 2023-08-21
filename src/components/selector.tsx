@@ -327,7 +327,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                   <div className="active-marketing-component-name">
                     <span
                       style={{
-                        fontSize: "18px",
+                        // fontSize: "18px",
                         whiteSpace: "nowrap",
                         textOverflow: "ellipsis",
                         overflow: "hidden",
@@ -384,7 +384,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                         return (
                           <div
                             className="ddd"
-                            style={{ backgroundColor: "#DDD" }}
+                            // style={{ backgroundColor: "#d7d7d7" }}
                           >
                             <ListItem
                               key={attribute.id}
@@ -411,8 +411,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    height: "13vh",
-                    width: "90vw",
+                    height: "4vh",
+                    width: "100vw",
                     paddingLeft: "5em",
                     // margin: "0px 19em"
                   }}
@@ -458,7 +458,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
-                      height: "13vh",
+                      height: "12vh",
                       width: "90vw",
                       paddingLeft: "5em", 
                     }}

@@ -11,7 +11,8 @@ export const List = styled.ul`
     white-space: nowrap;
     justify-content: center;
     height: 40px;
-    background-color: #ddd;
+    background-color: #d7d7d7;
+    text-transform: uppercase;
     @media screen and (max-width: 568px) {
         width: 100vw;
         transform-origin: 50% 50% 0px;
@@ -25,7 +26,7 @@ export const List = styled.ul`
 export const ListItem = styled.li<{ selected?: boolean }>`
     display: flex;
     flex-direction: column;    
-    font: 500 1rem/3 'Inter';
+    font: 100 1rem/3 'Inter';
     align-items: center;
     text-align: center;
     justify-content: center;
@@ -64,9 +65,8 @@ export const ListItem = styled.li<{ selected?: boolean }>`
         position: absolute;
         content:''; 
         width: 15.1em;
-        background-image:  ${props => { console.log(props);
-            return props.selected === true ? `url(${RoundedBorder})` : ''
-                           }};
+        background-image:  ${props => { return props.selected === true ? `url(${RoundedBorder})` : ''
+                           }};                         
         height: 43px;
         top: 0%;
         z-index: -1;
@@ -90,7 +90,6 @@ export const ListItemColor = styled.li<{ selected?: boolean, selectedColor?: any
     font-size: 12px;  
     background-color: #fff;
     border-color: ${props => props.selected ? 'black' : '#DDD'};
-
     &:hover {
       
     };
@@ -106,12 +105,13 @@ export const ListItemColor = styled.li<{ selected?: boolean, selectedColor?: any
     content: "${props => { return props.selected ? props.selectedColor : ''
                         }}";
     position: absolute;
-    top: 79%;    
+    top: 61%;    
     }
     
     @media screen and (max-width: 568px) {
     &:after {
-      bottom: -65%;        
+    //   bottom: 16% !important;     
+      top: 73% !important;    
       }
     }`;
 

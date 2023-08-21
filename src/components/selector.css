@@ -36,12 +36,13 @@
   .tray-header {
     display: flex;
     justify-content: space-between;
-    font-family: "Helvetica Now Text";
+    font-family: "open-sans-bold";
+    font-size: 1rem;
     height: 60px;
     position: absolute;
     width: 100%;
     top: 0em;
-    background-color: #ededed;
+    background-color: #f4f4f4;
 
   } 
 
@@ -60,8 +61,10 @@
     padding: 0px 20px;
     align-items: center;
     justify-content: center;
-    font-family: 'Inter', sans-serif;
-    font-size: 18px;
+    font-family: "open-sans-bold";
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
   }
 
   .active-marketing-component-index{
@@ -230,7 +233,7 @@
 .slider-list {
   /* width: 85vw !important; */
   width: 100% !important;
-  height: 80px; 
+  height: 113px; 
   text-align: center;
   /* transform: translateX(calc(-66.6667% - 0px)); */
   /* position: absolute; */
