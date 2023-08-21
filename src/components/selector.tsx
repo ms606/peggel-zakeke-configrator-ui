@@ -31,6 +31,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+
+// import required modules
+import { Navigation } from 'swiper/modules';
 
 const dialogsPortal = document.getElementById("dialogs-portal")!;
 
@@ -565,7 +569,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                       alignItems: "center",
                       height: "13vh",
                       width: "90vw",
-                      paddingLeft: "5em", 
+                      paddingLeft: "3em", 
+                      
                     }}
                   >
                     <List style={{ backgroundColor: "#fff", height: "80px" }}>
@@ -573,8 +578,10 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                         selectedAttribute &&
                         !isTrayOpen && (
                           <Swiper 
-                          // spaceBetween={50}
-                          // slidesPerView={3}
+                          spaceBetween={5}
+                          slidesPerView={2}
+                          navigation={true}
+                          modules={[ Navigation]}
                           onSlideChange={() => console.log('slide change')}
                           onSwiper={(swiper) => console.log(swiper)}
                         >

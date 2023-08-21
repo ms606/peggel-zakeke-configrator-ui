@@ -106,7 +106,7 @@ export const ListItemColor = styled.li<{ selected?: boolean, selectedColor?: any
     content: "${props => { return props.selected ? props.selectedColor : ''
                         }}";
     position: absolute;
-    top: 80%;    
+    top: 83%;    
     }
     
     @media screen and (max-width: 568px) {
