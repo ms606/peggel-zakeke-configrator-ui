@@ -196,8 +196,9 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   const handleAfterSlide = (currentSlide: any) => {
     console.log("Now viewing slide:", currentSlide);
     setSelectedCarouselSlide(currentSlide);
+    console.log("Now SelectedCarouselSlide:", selectedCarouselSlide);
   };
-  console.log(slidesToShow, "selectedCarouselSlide");
+  // console.log(slidesToShow, "selectedCarouselSlide");
 
   if (isSceneLoading || !groups || groups.length === 0)
     return (
@@ -451,7 +452,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                       alignItems: "center",
                       height: "13vh",
                       width: "90vw",
-                      paddingLeft: "5em",
+                      paddingLeft: "5em", 
                     }}
                   >
                     <List style={{ backgroundColor: "#fff", height: "80px" }}>
@@ -460,13 +461,13 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                         !isTrayOpen && (
                           <NukaCarousel
                             slideWidth="220px"
-                            slidesToScroll={5}
+                            slidesToScroll={50}
                             speed={10}
-                            slidesToShow={slidesToShow+2}
+                            slidesToShow={slidesToShow}
                            
                             slideIndex={selectedCarouselSlide}
                             //afterSlide={setSelectedCarouselSlide}
-                            afterSlide={handleAfterSlide}
+                            // afterSlide={handleAfterSlide}
                             //afterSlide={console.log(currentSlide)}
                             renderBottomCenterControls={() => <span />}
                             renderCenterRightControls={() => {
