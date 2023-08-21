@@ -195,7 +195,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   // const carouselClass = slides.length <= 7 ? 'small-slider' : 'large-slider';
   const handleAfterSlide = (currentSlide: any) => {
     console.log("Now viewing slide:", currentSlide);
-    // setSelectedCarouselSlide(currentSlide);
+    setSelectedCarouselSlide(currentSlide);
   };
   console.log(slidesToShow, "selectedCarouselSlide");
 
