@@ -23,7 +23,7 @@
     "react-select": "^5.7.4",
     "styled-components": "^5.3.10",
     "swiper": "^10.2.0",
-    "typescript": "^5.0.4",
+    "typescript": "^5.1.6",
     "zakeke-configurator-react": "0.0.160",
     "zustand": "^4.3.9"
   },
