@@ -229,7 +229,7 @@
 
 .slider-list {
   /* width: 85vw !important; */
-  width: 210% !important;
+  width: 100% !important;
   height: 80px; 
   text-align: center;
   /* transform: translateX(calc(-66.6667% - 0px)); */
@@ -251,6 +251,23 @@
   transition: height 300ms ease-in-out 0s;
   /* position: absolute; */
 }  
+
+
+.swiper-container{
+  width: 100%;
+}
+.swiper-wrapper {
+  width: 50%;
+}
+.swiper-slide {
+  text-align: center;
+  width: 76px !important;
+}
+.slide-image {
+  height: 400px;
+  width: 76px;
+}
+
 
 @media screen and (min-width: 768px) {
   .button-53 {
@@ -296,7 +313,7 @@
     }
   
   .slider-list {
-    width: 133% !important;
+    width: 136% !important;
     height: 80px; 
     text-align: center;
     /* transform: translateX(calc(-66.6667% - 0px)); */
