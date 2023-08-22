@@ -111,6 +111,7 @@ const App: FunctionComponent<{}> = () => {
           )}
 
           {!isMobile && (
+            <>
             <Layout>
               <div
                 style={{
@@ -130,16 +131,24 @@ const App: FunctionComponent<{}> = () => {
                   }
                 >                  
                   <ZakekeViewer />
-                  {/* <div>
-                    <h1> ^ </h1>  
-                  </div> */}
-                  
                 </div>
+               
+                {/* <div style={{zIndex: "4444",  
+                          position: "relative",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center"}}>
+                <h1> ^ </h1>  
+                </div> */}
+
               </div>
+              
               <Selector
                 trayPreviewOpenButton3DFunc={trayPreviewOpenButton3DFunc}
               />
             </Layout>
+            
+           </>
           )}
           <DialogsRenderer />
         </div>
