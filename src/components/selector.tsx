@@ -373,7 +373,15 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
             {!selectedTrayPreviewOpenButton && (
               <div style={{ width: "100vw" }}>
+                
+                <div style={{height: "60px", backgroundColor: "#d7d7d7"}}>
                 <List>
+                <div style={{height: "40px", display: "flex", 
+                              width: "100vw",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              backgroundColor: "#d7d7d7",
+                              }}> 
                   {attributes &&
                     !isTrayOpen &&
                     attributes.map((attribute) => {
@@ -384,7 +392,10 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                         return (
                           <div
                             className="ddd"
-                            // style={{ backgroundColor: "#d7d7d7" }}
+                            style={{ height: "40px",
+                                     display: "flex",
+                                     alignItems: "center",
+                                     justifyContent: "center", }}
                           >
                             <ListItem
                               key={attribute.id}
@@ -400,7 +411,10 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                         );
                       }
                     })}
+                   </div> 
                 </List>
+               </div>     
+
                 <br />
 
                 {selectedAttribute && selectedAttribute.options.length < slidesToShow && (    
@@ -411,9 +425,9 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    height: "4vh",
+                    height: "6vh",
                     width: "100vw",
-                    paddingLeft: "5em",
+                    // paddingLeft: "5em",
                     // margin: "0px 19em"
                   }}
                 >
@@ -422,7 +436,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                       selectedAttribute &&
                       !isTrayOpen && (
                         
-                        <div style={{display: "flex", justifyContent: "center"}}>
+                        <div style={{display: "flex", justifyContent: "center", 
+                            position: "relative", bottom: "35%"}}>
                         {selectedAttribute.options.map((option) => (
                             <ListItemColor
                               key={option.id}
@@ -567,13 +582,13 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "start",
-                      height: "13vh",
+                      height: "14vh",
                       width: "90vw",
                       paddingLeft: "3em", 
                       
                     }}
                   >
-                    <List style={{ backgroundColor: "#fff", height: "80px" }}>
+                    <List style={{ backgroundColor: "#fff", height: "117px" }}>
                       {!selectedTrayPreviewOpenButton &&
                         selectedAttribute &&
                         !isTrayOpen && (

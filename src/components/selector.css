@@ -61,8 +61,8 @@
     padding: 0px 20px;
     align-items: center;
     justify-content: center;
-    font-family: "open-sans-bold";
-    font-size: 1rem;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
     font-weight: bold;
     text-transform: uppercase;
   }
@@ -350,5 +350,9 @@
     height: 80px; 
     /* position: absolute; */
   }  
+
+  .swiper {
+    bottom: 43%;
+  }
   
 }

@@ -86,7 +86,7 @@ const App: FunctionComponent<{}> = () => {
                   display: "grid",
                   alignItems: "center",
                   justifyContent: "center",
-                  backgroundColor: "rgb(249 246 248)",
+                  backgroundColor: "#f4f4f4",
                 }}
               >
                 <div
@@ -117,7 +117,7 @@ const App: FunctionComponent<{}> = () => {
                   alignItems: "center",
                   justifyContent: "center",
                   gridArea: "1 / 2 / 12 / 1",
-                  backgroundColor: "rgb(249 246 248)",
+                  backgroundColor: "#f4f4f4",
                 }}
               >
                 <div

@@ -10,9 +10,10 @@ export const List = styled.ul`
     border-radius: 5px;
     white-space: nowrap;
     justify-content: center;
-    height: 40px;
-    background-color: #d7d7d7;
+    height: 35px;
+    background-color: #f4f4f4;
     text-transform: uppercase;
+    padding-top: 40px;
     @media screen and (max-width: 568px) {
         width: 100vw;
         transform-origin: 50% 50% 0px;
@@ -65,10 +66,10 @@ export const ListItem = styled.li<{ selected?: boolean }>`
         position: absolute;
         content:''; 
         width: 15.1em;
-        background-image:  ${props => { return props.selected === true ? `url(${RoundedBorder})` : ''
-                           }};                         
-        height: 43px;
-        top: 0%;
+        background-image:  ${props => { return props.selected === true ? `url(${RoundedBorder})` : '' }};                         
+        font-weight: 600;
+        height: 140%;
+        top: -31%;
         z-index: -1;
         border-radius: 64px 61px 12px 0px;
         }               
@@ -105,7 +106,11 @@ export const ListItemColor = styled.li<{ selected?: boolean, selectedColor?: any
     content: "${props => { return props.selected ? props.selectedColor : ''
                         }}";
     position: absolute;
-    top: 61%;    
+    top: 61%;
+    border-bottom: 1px solid #000;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;    
+    
     }
     
     @media screen and (max-width: 568px) {
