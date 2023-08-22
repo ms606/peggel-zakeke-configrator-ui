@@ -27,7 +27,7 @@ export const List = styled.ul`
 export const ListItem = styled.li<{ selected?: boolean }>`
     display: flex;
     flex-direction: column;    
-    font: 100 1rem/3 'Inter';
+    font: 250 1rem/3 'Inter';
     align-items: center;
     text-align: center;
     justify-content: center;
@@ -69,11 +69,56 @@ export const ListItem = styled.li<{ selected?: boolean }>`
         background-image:  ${props => { return props.selected === true ? `url(${RoundedBorder})` : '' }};                         
         font-weight: 600;
         height: 140%;
-        top: -31%;
+        top: -30%;
         z-index: -1;
         border-radius: 64px 61px 12px 0px;
         }               
 `;
+
+export const ListItemColorNoCarousel = styled.li<{ selected?: boolean, selectedColor?: any}>`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 0px 10px;
+    cursor: pointer;
+    margin: 0 3px;
+    border-radius: 100%;
+    width: 5.5em;
+    height: 5.1em;
+    white-space: nowrap;  
+    font-size: 12px;  
+    background-color: #fff;
+    border-color: ${props => props.selected ? 'black' : '#DDD'};
+    &:hover {
+      
+    };
+    
+    &:before {
+        content: '';
+        position: absolute;
+        bottom: 20%;
+        /* Additional styling for the :before pseudo-element can be added here */
+    };
+
+    &:after {
+    content: "${props => { return props.selected ? props.selectedColor : ''
+                        }}";
+    position: absolute;
+    top: 110%;
+    border-bottom: 1px solid #000;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;    
+    
+    }
+    
+    @media screen and (max-width: 568px) {
+    &:after {
+      top: 73% !important;    
+      }
+    }`;
+
 
 export const ListItemColor = styled.li<{ selected?: boolean, selectedColor?: any}>`
     display: flex;
@@ -115,7 +160,6 @@ export const ListItemColor = styled.li<{ selected?: boolean, selectedColor?: any
     
     @media screen and (max-width: 568px) {
     &:after {
-    //   bottom: 16% !important;     
       top: 73% !important;    
       }
     }`;

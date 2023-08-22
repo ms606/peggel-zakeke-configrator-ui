@@ -3,7 +3,7 @@ import "./selector.css";
 import React, { FunctionComponent, useEffect, useMemo, useState } from "react";
 import styled, { css } from "styled-components";
 import { useZakeke } from "zakeke-configurator-react";
-import { List, ListItem, ListItemImage, ListItemColor } from "./list";
+import { List, ListItem, ListItemImage, ListItemColor, ListItemColorNoCarousel } from "./list";
 import { PreviewContainer, BlurOverlay } from "./previewContainer";
 import Tray from "./Tray";
 import TrayPreviewOpenButton from "./TrayPreviewOpenButton";
@@ -417,18 +417,19 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
                 <br />
 
-                {selectedAttribute && selectedAttribute.options.length < slidesToShow && (    
+                
+
+                {/* NUKA CAROUSEL WHICH IS LESS THAN 16 slides and need to contract */}
+
+                 {selectedAttribute && selectedAttribute.options.length < slidesToShow && (    
                 <div
                   style={{
-                    // position: "relative",
                     backgroundColor: "#fff",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
                     height: "6vh",
-                    width: "100vw",
-                    // paddingLeft: "5em",
-                    // margin: "0px 19em"
+                    width: "100vw",                    
                   }}
                 >
                   <List style={{ backgroundColor: "#fff", height: "80px" }}>
@@ -439,7 +440,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                         <div style={{display: "flex", justifyContent: "center", 
                             position: "relative", bottom: "35%"}}>
                         {selectedAttribute.options.map((option) => (
-                            <ListItemColor
+                            <ListItemColorNoCarousel
                               key={option.id}
                               onClick={() => {
                                 selectOption(option.id);
@@ -454,15 +455,15 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                                   selected={option.selected}
                                 />
                               )}
-                            </ListItemColor>
+                            </ListItemColorNoCarousel>
                           ))}
                         </div>                                                
-                      )}
-
-                    {/* {selectedColorName}   */}
+                      )}                   
                   </List>
                 </div>
-              )}
+              )}   
+                
+
 
                 {/* NUKA CAROUSEL WHICH IS GREATER THAN 16 slides  */}
 

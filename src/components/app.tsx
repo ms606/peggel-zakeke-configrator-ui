@@ -100,6 +100,7 @@ const App: FunctionComponent<{}> = () => {
                        width: "87%",  position: "absolute", top: "28px", bottom: "0", left: "11%" }
                   }
                 >
+                 
                   <ZakekeViewer />
                 </div>
               </div>
@@ -127,8 +128,12 @@ const App: FunctionComponent<{}> = () => {
                       ? { width: "60vw", height: "60vh" }
                       : { width: "73vw", height: "73vh" }
                   }
-                >
+                >                  
                   <ZakekeViewer />
+                  {/* <div>
+                    <h1> ^ </h1>  
+                  </div> */}
+                  
                 </div>
               </div>
               <Selector
