@@ -375,6 +375,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
               <div style={{ width: "100vw" }}>
                 
                 <div style={{height: "60px", backgroundColor: "#d7d7d7"}}>
+                
                 <List>
                 <div style={{height: "40px", display: "flex", 
                               width: "100vw",
@@ -382,35 +383,88 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                               justifyContent: "center",
                               backgroundColor: "#d7d7d7",
                               }}> 
-                  {attributes &&
-                    !isTrayOpen &&
-                    attributes.map((attribute) => {
-                      // console.log(groups);
-                      // console.log(rightFootStrapOption1, attribute.name, 'ddddd',rightFootStrapOption1?.match(/\d+/)[0],  attribute.name?.match(/\d+/)[0]  );
-                      //console.log(selectedAttribute === attribute, 'selectedAttribute === attribute');
-                      if (attribute.enabled === true) {
-                        return (
-                          <div
-                            className="ddd"
-                            style={{ height: "40px",
-                                     display: "flex",
-                                     alignItems: "center",
-                                     justifyContent: "center", }}
+
+                {attributes &&
+                  !isTrayOpen && attributes.length > 2 && width < 400 ? 
+                    <Swiper 
+                    spaceBetween={90}
+                    slidesPerView={'auto'}
+                    //slidesPerView={'auto'}
+                    centeredSlides={true}
+                    // navigation={true}
+                    modules={[ Navigation]}
+                    onSlideChange={() => console.log('slide change')}
+                    onSwiper={(swiper) => console.log(swiper)}
+                  >
+                        {attributes &&
+                          !isTrayOpen &&
+                          attributes.map((attribute) => {
+
+                            // console.log(groups);
+                            // console.log(rightFootStrapOption1, attribute.name, 'ddddd',rightFootStrapOption1?.match(/\d+/)[0],  attribute.name?.match(/\d+/)[0]  );
+                            //console.log(selectedAttribute === attribute, 'selectedAttribute === attribute');
+                            if (attribute.enabled === true) {
+                              return (
+                                <>
+                                <SwiperSlide>          
+                                <div
+                                  className="ddd"
+                                  style={{ height: "40px",
+                                          display: "flex",
+                                          alignItems: "center",
+                                          justifyContent: "center", 
+                                          bottom: "-16%",
+                                          position: "relative"}}
+                                >
+                                  <ListItem
+                                    key={attribute.id}
+                                    selected={selectedAttribute === attribute}
+                                    onClick={() => {
+                                      selectAttribute(attribute.id);
+                                    // setSelectedCarouselSlide(0);
+                                    }}
+                                  >
+                                    {attribute.enabled === true && attribute.name}
+                                  </ListItem>
+                                </div>
+                                </SwiperSlide>
+                                </>
+                              );
+                            }
+                          })}
+
+                  </Swiper>    
+                : 
+                  attributes.map((attribute) => {
+
+                    // console.log(groups);
+                    // console.log(rightFootStrapOption1, attribute.name, 'ddddd',rightFootStrapOption1?.match(/\d+/)[0],  attribute.name?.match(/\d+/)[0]  );
+                    //console.log(selectedAttribute === attribute, 'selectedAttribute === attribute');
+                    if (attribute.enabled === true) {
+                      return (         
+                        <div
+                          className="ddd"
+                          style={{ height: "40px",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center", }}
+                        >
+                          <ListItem
+                            key={attribute.id}
+                            selected={selectedAttribute === attribute}
+                            onClick={() => {
+                              selectAttribute(attribute.id);
+                            // setSelectedCarouselSlide(0);
+                            }}
                           >
-                            <ListItem
-                              key={attribute.id}
-                              selected={selectedAttribute === attribute}
-                              onClick={() => {
-                                selectAttribute(attribute.id);
-                               // setSelectedCarouselSlide(0);
-                              }}
-                            >
-                              {attribute.enabled === true && attribute.name}
-                            </ListItem>
-                          </div>
-                        );
-                      }
-                    })}
+                            {attribute.enabled === true && attribute.name}
+                          </ListItem>
+                        </div>
+                      );
+                    }
+                  })
+                }
+                                   
                    </div> 
                 </List>
                </div>     
@@ -582,7 +636,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                       backgroundColor: "#fff",
                       display: "flex",
                       justifyContent: "center",
-                      alignItems: "start",
+                      alignItems: "end",
                       height: "14vh",
                       width: "90vw",
                       paddingLeft: "3em", 
