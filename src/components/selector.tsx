@@ -381,7 +381,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                               width: "100vw",
                               alignItems: "center",
                               justifyContent: "center",
-                              backgroundColor: "rgb(215 214 215)",
+                              backgroundColor: "rgb(229 229 229)",
                               }}> 
 
                 {attributes &&
