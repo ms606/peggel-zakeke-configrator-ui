@@ -122,11 +122,22 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     (attribute) => attribute.id === selectedAttributeId
   );
 
-  let indexToRemove = groups.findIndex((obj) => obj.id === -1);
+  // let indexToRemove = groups.findIndex((obj) => obj.id === -1);
+  
+  // if (indexToRemove !== -1) {
+  //   groups.splice(indexToRemove, 1);
+  // }
+    
+  let idsToRemove = [-1, 9341];
 
-  if (indexToRemove !== -1) {
-    groups.splice(indexToRemove, 1);
-  }
+  idsToRemove.forEach((id) => {
+      let indexToRemove = groups.findIndex((obj) => obj.id === id);
+      while (indexToRemove !== -1) {
+          groups.splice(indexToRemove, 1);
+          indexToRemove = groups.findIndex((obj) => obj.id === id);
+      }
+  });
+
 
   const dialogsPortal = document.getElementById("dialogs-portal");
 
@@ -312,7 +323,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                 onClick={handleLeftClick}
               >
                 <div className="mc-prev">
-                <ТrаыHeaderArrowLeftIcon />  
+                 <ТrаыHeaderArrowLeftIcon />  
                 </div>
               </button>
 
@@ -393,15 +404,16 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     centeredSlides={true}
                     // navigation={true}
                     modules={[ Navigation]}
-                    onSlideChange={() => console.log('slide change')}
-                    onSwiper={(swiper) => console.log(swiper)}
+                    // onSlideChange={() => console.log('slide change')}
+                    // onSwiper={(swiper) => console.log(swiper)}
                   >
                         {attributes &&
                           !isTrayOpen &&
+
                           attributes.map((attribute) => {
 
-                            // console.log(groups);
-                            // console.log(rightFootStrapOption1, attribute.name, 'ddddd',rightFootStrapOption1?.match(/\d+/)[0],  attribute.name?.match(/\d+/)[0]  );
+                            //console.log(groups);
+                            //console.log(rightFootStrapOption1, attribute.name, 'ddddd',rightFootStrapOption1?.match(/\d+/)[0],  attribute.name?.match(/\d+/)[0]  );
                             //console.log(selectedAttribute === attribute, 'selectedAttribute === attribute');
                             if (attribute.enabled === true) {
                               return (
@@ -557,9 +569,9 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                               //   selectedAttribute.options.length <= slidesToShow
                               // )
                               //  return <></>;
-                              console.log(selectedCarouselSlide, selectedAttribute.options.length, 
-                                  slidesToShow
-                                );
+                              //console.log(selectedCarouselSlide, selectedAttribute.options.length, 
+                                //  slidesToShow
+                                //);
                               
                               if (
                                 // selectedCarouselSlide !==
@@ -652,8 +664,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                           slidesPerView={2}
                           navigation={true}
                           modules={[ Navigation]}
-                          onSlideChange={() => console.log('slide change')}
-                          onSwiper={(swiper) => console.log(swiper)}
+                          //onSlideChange={() => console.log('slide change')}
+                          //onSwiper={(swiper) => console.log(swiper)}
                         >
                               {selectedAttribute.options.map((option) => (
                               <>
