@@ -173,6 +173,12 @@ button:focus {
 
   .animate-wrapper-0 {
     border-radius: 18px 18px 0px 0px;
+    }  
+  
+  .active-marketing-component-name{
+    font-size: 0.73em !important;
   }  
+    
   }
   
+
