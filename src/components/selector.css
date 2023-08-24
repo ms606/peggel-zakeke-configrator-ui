@@ -279,6 +279,8 @@
   &:after {
     font-size: 12px !important;
     height: 12px !important;
+    -webkit-font-size: 12px !important;
+    -moz-font-size: 12px !important;
   } 
 }
 
@@ -290,6 +292,8 @@
  &:after {
   font-size: 12px !important;
   height: 12px !important;
+  -webkit-font-size: 12px !important;
+  -moz-font-size: 12px !important;
  } 
 }
 
