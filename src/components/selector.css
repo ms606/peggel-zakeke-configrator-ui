@@ -270,31 +270,22 @@
   width: 76px !important;
 }
 
-.swiper-button-next {
+
+.swiper-button-next::after {
   color:rgb(5, 6, 45) !important;
   font-size: 10px !important;
   height: 10px !important;
-  left: 13.1  em !important;
-
-  &:after {
-    font-size: 12px !important;
-    height: 12px !important;
-    -webkit-font-size: 12px !important;
-    -moz-font-size: 12px !important;
-  } 
+  left: 13.1  em !important;  
+  -webkit-font-size: 12px !important;
+  -moz-height: 12px !important;
 }
 
-.swiper-button-prev {
+.swiper-button-prev::after {
  color: black !important;
  font-size: 10px !important;
- height: 15px !important;
- 
- &:after {
-  font-size: 12px !important;
-  height: 12px !important;
-  -webkit-font-size: 12px !important;
-  -moz-font-size: 12px !important;
- } 
+ height: 10px !important;
+ -webkit-font-size: 12px !important;
+ -moz-height: 12px !important;
 }
 
 
@@ -361,31 +352,21 @@
     bottom: 10%;
   }
 
-  .swiper-button-next {
+  .swiper-button-next::after {
     color:rgb(5, 6, 45) !important;
     font-size: 10px !important;
     height: 10px !important;
-    left: 13.1  em !important;
-  
-    &:after {
-      font-size: 12px !important;
-      height: 12px !important;
-      -webkit-font-size: 12px !important;
-      -moz-height: 12px !important;
-    } 
-  }
-  
-  .swiper-button-prev {
-   color: black !important;
-   font-size: 10px !important;
-   height: 15px !important;
-   
-   &:after {
-    font-size: 12px !important;
-    height: 12px !important;
+    left: 13.1  em !important;  
     -webkit-font-size: 12px !important;
     -moz-height: 12px !important;
-   } 
+  }
+  
+  .swiper-button-prev::after {
+   color: black !important;
+   font-size: 10px !important;
+   height: 10px !important;
+   -webkit-font-size: 12px !important;
+   -moz-height: 12px !important;
   }
   
 }
