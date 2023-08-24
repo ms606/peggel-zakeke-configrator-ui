@@ -95,9 +95,12 @@ const App: FunctionComponent<{}> = () => {
                     selectedTrayPreviewOpenButton3D
                       ? { width: "20vw", height: "20vh" }
                       : { 
-                        //width: "56vw", height: "55vh",
                         aspectRatio: "1 / 1",
-                       width: "87%",  position: "absolute", top: "28px", bottom: "0", left: "11%" }
+                        width: "100%",  
+                        position: "absolute", 
+                        top: "1em", 
+                        bottom: "0", 
+                        left: "0%" }
                   }
                 >
                  
