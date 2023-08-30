@@ -318,6 +318,27 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                 justifyContent: "center",
               }}
             >
+              {width > 420 && 
+                  <span
+                  style={{
+                    // fontSize: "18px",
+                    whiteSpace: "nowrap",
+                    textOverflow: "ellipsis",
+                    overflow: "hidden",
+                    lineHeight: "28px",
+                    position: "absolute",
+                    right: "105%",
+                    color: '#a3a3a3',
+                    fontFamily: 'Open Sans , sans-serif',
+                    fontSize: '14px'
+                  }}
+                  >                
+                  {(currentIndex != 0) &&
+                  groups[currentIndex - 1].name                 
+                  }                 
+                  </span>
+              }
+
               <button
                 className="previous-customization"
                 onClick={handleLeftClick}
@@ -353,6 +374,27 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
               <button className="next-customization" onClick={handleRightClick}>
                <ТrаыHeaderArrowRightIcon />               
               </button>
+              {width > 420 && 
+                  <span
+                  style={{
+                    // fontSize: "18px",
+                    whiteSpace: "nowrap",
+                    textOverflow: "ellipsis",
+                    overflow: "hidden",
+                    lineHeight: "28px",
+                    position: "absolute",
+                    left: "105%",
+                    color: '#a3a3a3',
+                    fontFamily: 'Open Sans , sans-serif',
+                    fontSize: '14px'
+
+                  }}
+                  >                
+                  {(currentIndex+1 < groups.length) &&
+                    groups[currentIndex +1].name                 
+                  }                
+                  </span>
+              }
             </div>
 
           
@@ -551,8 +593,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                         !isTrayOpen && (
                           <NukaCarousel
                             slideWidth="80px"
-                            //slidesToScroll={50}
-                            speed={50}
+                            slidesToScroll={14}
+                            speed={5}
                             slidesToShow={slidesToShow}
                             
                             slideIndex={selectedCarouselSlide}
