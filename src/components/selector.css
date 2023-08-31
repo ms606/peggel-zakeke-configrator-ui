@@ -257,7 +257,7 @@
 
 .swiper {
   width: 80vw !important;
-  height: 120% !important  ;
+  height: 290% !important;
 }
 .swiper-container{
   width: 90vw;
@@ -272,10 +272,12 @@
 
 .swiper-button-next {
   align-items: start;
+  top: var(--swiper-navigation-top-offset, 26%) !important;
 }
 
 .swiper-button-prev {
   align-items: start;
+  top: var(--swiper-navigation-top-offset, 26%) !important;
 }
 
 .swiper-button-next::after {
@@ -359,15 +361,19 @@
 
   .swiper {
     bottom: 10%;
+    height: 120% !important;
   }
 
   .swiper-button-next {
-    align-items: start !important;
+    align-items: start;
+    top: var(--swiper-navigation-top-offset, 29%) !important;
   }
   
   .swiper-button-prev {
-    align-items: start !important;
+    align-items: start;
+    top: var(--swiper-navigation-top-offset, 29%) !important;
   }
+
 
   .swiper-button-next::after {
     color:rgb(5, 6, 45) !important;
