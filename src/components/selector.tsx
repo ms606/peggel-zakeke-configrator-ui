@@ -1,9 +1,21 @@
 //import 'bootstrap/dist/css/bootstrap.css';
 import "./selector.css";
-import React, { FunctionComponent, useEffect, useMemo, useState } from "react";
+import React, {
+  FunctionComponent,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import styled, { css } from "styled-components";
 import { useZakeke } from "zakeke-configurator-react";
-import { List, ListItem, ListItemImage, ListItemColor, ListItemColorNoCarousel } from "./list";
+import {
+  List,
+  ListItem,
+  ListItemImage,
+  ListItemColor,
+  ListItemColorNoCarousel,
+} from "./list";
 import { PreviewContainer, BlurOverlay } from "./previewContainer";
 import Tray from "./Tray";
 import TrayPreviewOpenButton from "./TrayPreviewOpenButton";
@@ -22,19 +34,20 @@ import {
 } from "./Atomic";
 import { ReactComponent as ArrowRightIcon } from "../assets/icons/arrow-right-solid.svg";
 import { ReactComponent as ArrowLeftIcon } from "../assets/icons/arrow-left-solid.svg";
-import { ReactComponent as ТrаыHeaderArrowRightIcon} from "../assets/icons/tray-header-arrow-right.svg";
-import { ReactComponent as ТrаыHeaderArrowLeftIcon} from "../assets/icons/tray-header-arrow-left.svg";
+import { ReactComponent as ТrаыHeaderArrowRightIcon } from "../assets/icons/tray-header-arrow-right.svg";
+import { ReactComponent as ТrаыHeaderArrowLeftIcon } from "../assets/icons/tray-header-arrow-left.svg";
 
 import NukaCarousel from "nuka-carousel";
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 // import required modules
-import { Navigation } from 'swiper/modules';
+import { Autoplay, Navigation } from "swiper/modules";
 
 const dialogsPortal = document.getElementById("dialogs-portal")!;
 
@@ -69,6 +82,33 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   } = useZakeke();
 
   const { setIsLoading, isMobile } = useStore();
+
+  const swipper = useRef<any | null>(null);
+  const intervalRef = useRef<any | null>(null);
+  const navigationPrevRef = useRef<HTMLDivElement>(null);
+  const navigationNextRef = useRef<HTMLDivElement>(null);
+
+  const swiper = useSwiper();
+
+  const startInterval = (direction: string) => {
+    console.log("start swipee", swipper);
+    intervalRef.current = setInterval(() => {
+      switch (direction) {
+        case "prev":
+          swipper.current.slidePrev();
+          break;
+        case "next":
+          swipper.current.slideNext();
+      }
+    }, 350);
+  };
+
+  const stopInterval = () => {
+    console.log("stop swipee", swipper, intervalRef);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+  };
 
   // Keep saved the ID and not the refereces, they will change on each update
   const [selectedGroupId, selectGroup] = useState<number | null>(null);
@@ -123,21 +163,20 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   );
 
   // let indexToRemove = groups.findIndex((obj) => obj.id === -1);
-  
+
   // if (indexToRemove !== -1) {
   //   groups.splice(indexToRemove, 1);
   // }
-    
+
   let idsToRemove = [-1, 9341];
 
   idsToRemove.forEach((id) => {
-      let indexToRemove = groups.findIndex((obj) => obj.id === id);
-      while (indexToRemove !== -1) {
-          groups.splice(indexToRemove, 1);
-          indexToRemove = groups.findIndex((obj) => obj.id === id);
-      }
+    let indexToRemove = groups.findIndex((obj) => obj.id === id);
+    while (indexToRemove !== -1) {
+      groups.splice(indexToRemove, 1);
+      indexToRemove = groups.findIndex((obj) => obj.id === id);
+    }
   });
-
 
   const dialogsPortal = document.getElementById("dialogs-portal");
 
@@ -216,7 +255,11 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   const handleAfterSlide = (currentSlide: any) => {
     console.log("Now viewing slide:", currentSlide, currentSlide.typeof);
     setSelectedCarouselSlide(currentSlide);
-    console.log("Now SelectedCarouselSlide:", setSelectedCarouselSlide(currentSlide), selectedCarouselSlide);
+    console.log(
+      "Now SelectedCarouselSlide:",
+      setSelectedCarouselSlide(currentSlide),
+      selectedCarouselSlide
+    );
   };
   // console.log(slidesToShow, "selectedCarouselSlide");
 
@@ -318,8 +361,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                 justifyContent: "center",
               }}
             >
-              {width > 420 && 
-                  <span
+              {width > 420 && (
+                <span
                   style={{
                     // fontSize: "18px",
                     whiteSpace: "nowrap",
@@ -328,23 +371,21 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     lineHeight: "28px",
                     position: "absolute",
                     right: "105%",
-                    color: '#a3a3a3',
-                    fontFamily: 'Open Sans , sans-serif',
-                    fontSize: '14px'
+                    color: "#a3a3a3",
+                    fontFamily: "Open Sans , sans-serif",
+                    fontSize: "14px",
                   }}
-                  >                
-                  {(currentIndex != 0) &&
-                  groups[currentIndex - 1].name                 
-                  }                 
-                  </span>
-              }
+                >
+                  {currentIndex != 0 && groups[currentIndex - 1].name}
+                </span>
+              )}
 
               <button
                 className="previous-customization"
                 onClick={handleLeftClick}
               >
                 <div className="mc-prev">
-                 <ТrаыHeaderArrowLeftIcon />  
+                  <ТrаыHeaderArrowLeftIcon />
                 </div>
               </button>
 
@@ -372,10 +413,10 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                 </div>
               </div>
               <button className="next-customization" onClick={handleRightClick}>
-               <ТrаыHeaderArrowRightIcon />               
+                <ТrаыHeaderArrowRightIcon />
               </button>
-              {width > 420 && 
-                  <span
+              {width > 420 && (
+                <span
                   style={{
                     // fontSize: "18px",
                     whiteSpace: "nowrap",
@@ -384,20 +425,16 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     lineHeight: "28px",
                     position: "absolute",
                     left: "105%",
-                    color: '#a3a3a3',
-                    fontFamily: 'Open Sans , sans-serif',
-                    fontSize: '14px'
-
+                    color: "#a3a3a3",
+                    fontFamily: "Open Sans , sans-serif",
+                    fontSize: "14px",
                   }}
-                  >                
-                  {(currentIndex+1 < groups.length) &&
-                    groups[currentIndex +1].name                 
-                  }                
-                  </span>
-              }
+                >
+                  {currentIndex + 1 < groups.length &&
+                    groups[currentIndex + 1].name}
+                </span>
+              )}
             </div>
-
-          
           </div>
 
           <br />
@@ -426,361 +463,410 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
             {!selectedTrayPreviewOpenButton && (
               <div style={{ width: "100vw" }}>
-                
-                <div style={{height: "60px", backgroundColor: "#d7d7d7"}}>
-                
-                <List>
-                <div style={{height: "40px", display: "flex", 
-                              width: "100vw",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              backgroundColor: "rgb(229 229 229)",
-                              }}> 
-
-                {attributes &&
-                  !isTrayOpen && attributes.length > 2 && width < 400 ? 
-                    <Swiper 
-                    spaceBetween={90}
-                    slidesPerView={'auto'}
-                    //slidesPerView={'auto'}
-                    centeredSlides={true}
-                    // navigation={true}
-                    modules={[ Navigation]}
-                    // onSlideChange={() => console.log('slide change')}
-                    // onSwiper={(swiper) => console.log(swiper)}
-                  >
-                        {attributes &&
-                          !isTrayOpen &&
-
-                          attributes.map((attribute) => {
-
-                            //console.log(groups);
-                            //console.log(rightFootStrapOption1, attribute.name, 'ddddd',rightFootStrapOption1?.match(/\d+/)[0],  attribute.name?.match(/\d+/)[0]  );
-                            //console.log(selectedAttribute === attribute, 'selectedAttribute === attribute');
-                            if (attribute.enabled === true) {
-                              return (
-                                <>
-                                <SwiperSlide>          
-                                <div
-                                  className="ddd"
-                                  style={{ height: "40px",
+                <div style={{ height: "60px", backgroundColor: "#d7d7d7" }}>
+                  <List>
+                    <div
+                      style={{
+                        height: "40px",
+                        display: "flex",
+                        width: "100vw",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        backgroundColor: "rgb(229 229 229)",
+                      }}
+                    >
+                      {attributes &&
+                      !isTrayOpen &&
+                      attributes.length > 2 &&
+                      width < 400 ? (
+                        <Swiper
+                          spaceBetween={90}
+                          slidesPerView={"auto"}
+                          centeredSlides={true}
+                          modules={[Navigation]}
+                        >
+                          {attributes &&
+                            !isTrayOpen &&
+                            attributes.map((attribute) => {
+                              //console.log(groups);
+                              //console.log(rightFootStrapOption1, attribute.name, 'ddddd',rightFootStrapOption1?.match(/\d+/)[0],  attribute.name?.match(/\d+/)[0]  );
+                              //console.log(selectedAttribute === attribute, 'selectedAttribute === attribute');
+                              if (attribute.enabled === true) {
+                                return (
+                                  <>
+                                    <SwiperSlide>
+                                      <div
+                                        className="ddd"
+                                        style={{
+                                          height: "40px",
                                           display: "flex",
                                           alignItems: "center",
-                                          justifyContent: "center", 
+                                          justifyContent: "center",
                                           bottom: "-16%",
-                                          position: "relative"}}
-                                >
-                                  <ListItem
-                                    key={attribute.id}
-                                    selected={selectedAttribute === attribute}
-                                    onClick={() => {
-                                      selectAttribute(attribute.id);
-                                    // setSelectedCarouselSlide(0);
-                                    }}
-                                  >
-                                    {attribute.enabled === true && attribute.name}
-                                  </ListItem>
-                                </div>
-                                </SwiperSlide>
-                                </>
-                              );
-                            }
-                          })}
-
-                  </Swiper>    
-                : 
-                  attributes.map((attribute) => {
-
-                    // console.log(groups);
-                    // console.log(rightFootStrapOption1, attribute.name, 'ddddd',rightFootStrapOption1?.match(/\d+/)[0],  attribute.name?.match(/\d+/)[0]  );
-                    //console.log(selectedAttribute === attribute, 'selectedAttribute === attribute');
-                    if (attribute.enabled === true) {
-                      return (         
-                        <div
-                          className="ddd"
-                          style={{ height: "40px",
+                                          position: "relative",
+                                        }}
+                                      >
+                                        <ListItem
+                                          key={attribute.id}
+                                          selected={
+                                            selectedAttribute === attribute
+                                          }
+                                          onClick={() => {
+                                            selectAttribute(attribute.id);
+                                            // setSelectedCarouselSlide(0);
+                                          }}
+                                        >
+                                          {attribute.enabled === true &&
+                                            attribute.name}
+                                        </ListItem>
+                                      </div>
+                                    </SwiperSlide>
+                                  </>
+                                );
+                              }
+                            })}
+                        </Swiper>
+                      ) : (
+                        attributes.map((attribute) => {
+                          // console.log(groups);
+                          // console.log(rightFootStrapOption1, attribute.name, 'ddddd',rightFootStrapOption1?.match(/\d+/)[0],  attribute.name?.match(/\d+/)[0]  );
+                          //console.log(selectedAttribute === attribute, 'selectedAttribute === attribute');
+                          if (attribute.enabled === true) {
+                            return (
+                              <div
+                                className="ddd"
+                                style={{
+                                  height: "40px",
                                   display: "flex",
                                   alignItems: "center",
-                                  justifyContent: "center", }}
-                        >
-                          <ListItem
-                            key={attribute.id}
-                            selected={selectedAttribute === attribute}
-                            onClick={() => {
-                              selectAttribute(attribute.id);
-                            // setSelectedCarouselSlide(0);
-                            }}
-                          >
-                            {attribute.enabled === true && attribute.name}
-                          </ListItem>
-                        </div>
-                      );
-                    }
-                  })
-                }
-                                   
-                   </div> 
-                </List>
-               </div>     
+                                  justifyContent: "center",
+                                }}
+                              >
+                                <ListItem
+                                  key={attribute.id}
+                                  selected={selectedAttribute === attribute}
+                                  onClick={() => {
+                                    selectAttribute(attribute.id);
+                                    // setSelectedCarouselSlide(0);
+                                  }}
+                                >
+                                  {attribute.enabled === true && attribute.name}
+                                </ListItem>
+                              </div>
+                            );
+                          }
+                        })
+                      )}
+                    </div>
+                  </List>
+                </div>
 
                 <br />
 
-                
-
                 {/* NUKA CAROUSEL WHICH IS LESS THAN 16 slides and need to contract */}
 
-                 {selectedAttribute && selectedAttribute.options.length < slidesToShow && (    
-                <div
-                  style={{
-                    backgroundColor: "#fff",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "6vh",
-                    width: "100vw",                    
-                  }}
-                >
-                  <List style={{ backgroundColor: "#fff", height: "80px" }}>
-                    {!selectedTrayPreviewOpenButton &&
-                      selectedAttribute &&
-                      !isTrayOpen && (
-                        
-                        <div style={{display: "flex", justifyContent: "center", 
-                            position: "relative", bottom: "35%"}}>
-                        {selectedAttribute.options.map((option) => (
-                            <ListItemColorNoCarousel
-                              key={option.id}
-                              onClick={() => {
-                                selectOption(option.id);
+                {selectedAttribute &&
+                  selectedAttribute.options.length < slidesToShow && (
+                    <div
+                      style={{
+                        backgroundColor: "#fff",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        height: "6vh",
+                        width: "100vw",
+                      }}
+                    >
+                      <List style={{ backgroundColor: "#fff", height: "80px" }}>
+                        {!selectedTrayPreviewOpenButton &&
+                          selectedAttribute &&
+                          !isTrayOpen && (
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                position: "relative",
+                                bottom: "35%",
                               }}
-                              selected={option.selected}
-                              selectedColor={selectedColorName}
                             >
-                              {option.imageUrl && (
-                                <ListItemImage
-                                  src={option.imageUrl}
-                                  onClick={() => selectColorName(option.name)}
+                              {selectedAttribute.options.map((option) => (
+                                <ListItemColorNoCarousel
+                                  key={option.id}
+                                  onClick={() => {
+                                    selectOption(option.id);
+                                  }}
                                   selected={option.selected}
-                                />
-                              )}
-                            </ListItemColorNoCarousel>
-                          ))}
-                        </div>                                                
-                      )}                   
-                  </List>
-                </div>
-              )}   
-                
-
+                                  selectedColor={selectedColorName}
+                                >
+                                  {option.imageUrl && (
+                                    <ListItemImage
+                                      src={option.imageUrl}
+                                      onClick={() =>
+                                        selectColorName(option.name)
+                                      }
+                                      selected={option.selected}
+                                    />
+                                  )}
+                                </ListItemColorNoCarousel>
+                              ))}
+                            </div>
+                          )}
+                      </List>
+                    </div>
+                  )}
 
                 {/* NUKA CAROUSEL WHICH IS GREATER THAN 16 slides  */}
 
-                {selectedAttribute && selectedAttribute.options.length >= slidesToShow && width > 400 && (
-                  <div
-                    style={{
-                      backgroundColor: "#fff",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      height: "12vh",
-                      width: "90vw",
-                      paddingLeft: "5em", 
-                    }}
-                  >
-                    <List style={{ backgroundColor: "#fff", height: "80px" }}>
-                      {!selectedTrayPreviewOpenButton &&
-                        selectedAttribute &&
-                        !isTrayOpen && (
+                {selectedAttribute &&
+                  selectedAttribute.options.length >= slidesToShow &&
+                  width > 400 && (
+                    <div
+                      style={{
+                        backgroundColor: "#fff",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        height: "12vh",
+                        width: "90vw",
+                        paddingLeft: "5em",
+                      }}
+                    >
+                      <div
+                        ref={navigationPrevRef}
+                        style={{
+                          position: "absolute",
+                          width: "8em",
+                          left: "7em",
+                          height: "5em",
+                          zIndex: "2",
+                          backgroundColor: "transparent",
+                          color: "transparent",
+                        }}
+                        onMouseEnter={() => {
+                          startInterval("prev");
+                        }}
+                        onMouseLeave={() => {
+                          stopInterval();
+                        }}
+                      >
+                        "Left"
+                      </div>
 
-                        <Swiper 
-                          spaceBetween={1}
-                          slidesPerView={12}
-                          navigation={true}
-                          modules={[ Navigation]}
-                          //onSlideChange={() => console.log('slide change')}
-                          //onSwiper={(swiper) => console.log(swiper)}
-                        >
-                              {selectedAttribute.options.map((option) => (
+                      <List style={{ backgroundColor: "#fff", height: "80px" }}>
+                        {!selectedTrayPreviewOpenButton &&
+                          selectedAttribute &&
+                          !isTrayOpen && (
+                            <>
+                              <Swiper
+                                spaceBetween={1}
+                                slidesPerView={12}
+                                navigation={true}
+                                onSwiper={(swiper) => {
+                                  // Save the Swiper instance to the ref when it's ready
+                                  console.log("initizalize swipper", swipper);
 
-                              <SwiperSlide>
-                              
-                              
-                              <>
-                                <ListItemColor
-                                  key={option.id}
-                                  onClick={() => {
-                                    selectOption(option.id);
-                                  }}
-                                  selected={option.selected}
-                                  selectedColor={selectedColorName}
-                                >
-                                  {option.imageUrl && (
-                                    <ListItemImage
-                                      src={option.imageUrl}
-                                      onClick={() => selectColorName(option.name)}
-                                      selected={option.selected}
-                                    />
-                                  )}
-                                </ListItemColor>
-                              </>
-                              </SwiperSlide>
-                            ))}
-                              
-                              
-                        </Swiper>  
+                                  swipper.current = swiper;
+                                  console.log("swipper current", swipper);
+                                }}
+                                ref={swipper}
+                                modules={[Autoplay, Navigation]}
+                              >
+                                {selectedAttribute.options.map((option) => (
+                                  <SwiperSlide>
+                                    <>
+                                      <ListItemColor
+                                        key={option.id}
+                                        onClick={() => {
+                                          selectOption(option.id);
+                                        }}
+                                        selected={option.selected}
+                                        selectedColor={selectedColorName}
+                                      >
+                                        {option.imageUrl && (
+                                          <ListItemImage
+                                            src={option.imageUrl}
+                                            onClick={() =>
+                                              selectColorName(option.name)
+                                            }
+                                            selected={option.selected}
+                                          />
+                                        )}
+                                      </ListItemColor>
+                                    </>
+                                  </SwiperSlide>
+                                ))}
+                              </Swiper>
+                            </>
 
+                            // <NukaCarousel
+                            //   slideWidth="80px"
+                            //   slidesToScroll={51}
+                            //   speed={5}
+                            //   slidesToShow={slidesToShow}
 
-                          // <NukaCarousel
-                          //   slideWidth="80px"
-                          //   slidesToScroll={51}
-                          //   speed={5}
-                          //   slidesToShow={slidesToShow}
-                            
-                          //   slideIndex={selectedCarouselSlide}
-                          //   afterSlide={setSelectedCarouselSlide}
-                          //   //afterSlide={(v) => setSelectedCarouselSlide(v)}
-                          //   //afterSlide={handleAfterSlide}
-                          //   //afterSlide={console.log(currentSlide)}
-                          //   renderBottomCenterControls={() => <span />}
-                          //   renderCenterRightControls={() => {
-                          //     // console.log(selectedAttribute.options,'selectedAttribute.options');
-                          //     // if (selectedAttribute.options.length <= slidesToShow)
-                          //     //   return <></>;
-                          //     // if (
-                          //     //   selectedAttribute.options.length <= slidesToShow
-                          //     // )
-                          //     //  return <></>;
-                          //     //console.log(selectedCarouselSlide, selectedAttribute.options.length, 
-                          //       //  slidesToShow
-                          //       //);
-                              
-                          //     if (
-                          //       // selectedCarouselSlide !==
-                          //       // (
-                          //         selectedAttribute.options.length - slidesToShow > 0
-                          //         // ? selectedAttribute.options.length - slidesToShow
-                          //         // /: selectedCarouselSlide)
-                          //     )
-                          //       return (
-                          //         <ArrowRight
-                          //           onClick={() =>
-                          //             setSelectedCarouselSlide(
-                          //               selectedCarouselSlide + 1
-                          //             )
-                          //           }
-                          //         >
-                          //           <ArrowRightIconStyled>
-                          //             <ArrowRightIcon />
-                          //           </ArrowRightIconStyled>
-                          //         </ArrowRight>
-                          //       );
-                          //   }}
-                          //   renderCenterLeftControls={() => {
-                          //     if (selectedCarouselSlide !== 0)
-                          //       return (
-                          //         <ArrowLeft
-                          //           onClick={() =>
-                          //             setSelectedCarouselSlide(
-                          //               selectedCarouselSlide - 1
-                          //             )
-                          //           }
-                          //         >
-                          //           <ArrowLeftIconStyled>
-                          //             <ArrowLeftIcon />
-                          //           </ArrowLeftIconStyled>
-                          //         </ArrowLeft>
-                          //       );
-                          //   }}
-                          // >
-                          //   {selectedAttribute.options.map((option) => (
-                          //     <>
-                          //       <ListItemColor
-                          //         key={option.id}
-                          //         onClick={() => {
-                          //           selectOption(option.id);
-                          //         }}
-                          //         selected={option.selected}
-                          //         selectedColor={selectedColorName}
-                          //       >
-                          //         {option.imageUrl && (
-                          //           <ListItemImage
-                          //             src={option.imageUrl}
-                          //             onClick={() => selectColorName(option.name)}
-                          //             selected={option.selected}
-                          //           />
-                          //         )}
-                          //       </ListItemColor>
-                          //     </>
-                              
-                          //   ))}
-                          // </NukaCarousel>
-                        )}
-                      {/* {selectedColorName}   */}
-                    </List>
-                  </div>
-                )}
+                            //   slideIndex={selectedCarouselSlide}
+                            //   afterSlide={setSelectedCarouselSlide}
+                            //   //afterSlide={(v) => setSelectedCarouselSlide(v)}
+                            //   //afterSlide={handleAfterSlide}
+                            //   //afterSlide={console.log(currentSlide)}
+                            //   renderBottomCenterControls={() => <span />}
+                            //   renderCenterRightControls={() => {
+                            //     // console.log(selectedAttribute.options,'selectedAttribute.options');
+                            //     // if (selectedAttribute.options.length <= slidesToShow)
+                            //     //   return <></>;
+                            //     // if (
+                            //     //   selectedAttribute.options.length <= slidesToShow
+                            //     // )
+                            //     //  return <></>;
+                            //     //console.log(selectedCarouselSlide, selectedAttribute.options.length,
+                            //       //  slidesToShow
+                            //       //);
 
+                            //     if (
+                            //       // selectedCarouselSlide !==
+                            //       // (
+                            //         selectedAttribute.options.length - slidesToShow > 0
+                            //         // ? selectedAttribute.options.length - slidesToShow
+                            //         // /: selectedCarouselSlide)
+                            //     )
+                            //       return (
+                            //         <ArrowRight
+                            //           onClick={() =>
+                            //             setSelectedCarouselSlide(
+                            //               selectedCarouselSlide + 1
+                            //             )
+                            //           }
+                            //         >
+                            //           <ArrowRightIconStyled>
+                            //             <ArrowRightIcon />
+                            //           </ArrowRightIconStyled>
+                            //         </ArrowRight>
+                            //       );
+                            //   }}
+                            //   renderCenterLeftControls={() => {
+                            //     if (selectedCarouselSlide !== 0)
+                            //       return (
+                            //         <ArrowLeft
+                            //           onClick={() =>
+                            //             setSelectedCarouselSlide(
+                            //               selectedCarouselSlide - 1
+                            //             )
+                            //           }
+                            //         >
+                            //           <ArrowLeftIconStyled>
+                            //             <ArrowLeftIcon />
+                            //           </ArrowLeftIconStyled>
+                            //         </ArrowLeft>
+                            //       );
+                            //   }}
+                            // >
+                            //   {selectedAttribute.options.map((option) => (
+                            //     <>
+                            //       <ListItemColor
+                            //         key={option.id}
+                            //         onClick={() => {
+                            //           selectOption(option.id);
+                            //         }}
+                            //         selected={option.selected}
+                            //         selectedColor={selectedColorName}
+                            //       >
+                            //         {option.imageUrl && (
+                            //           <ListItemImage
+                            //             src={option.imageUrl}
+                            //             onClick={() => selectColorName(option.name)}
+                            //             selected={option.selected}
+                            //           />
+                            //         )}
+                            //       </ListItemColor>
+                            //     </>
+
+                            //   ))}
+                            // </NukaCarousel>
+                          )}
+                        {/* {selectedColorName}   */}
+                      </List>
+                      <div
+                        ref={navigationPrevRef}
+                        style={{
+                          position: "absolute",
+                          width: "8em",
+                          right: "8em",
+                          height: "5em",
+                          zIndex: "2",
+                          backgroundColor: "transparent",
+                          color: "transparent",
+                        }}
+                        onMouseEnter={() => {
+                          startInterval("next");
+                        }}
+                        onMouseLeave={() => {
+                          stopInterval();
+                        }}
+                      >
+                        "Right"
+                      </div>
+                    </div>
+                  )}
 
                 {/* NUKA CAROUSEL WHICH IS GREATER THAN 16 slides FOR mobile phone  */}
 
-                {selectedAttribute && selectedAttribute.options.length >= slidesToShow && width <= 400 && (
-                  <div className="mobileCarousel"
-                    style={{
-                      backgroundColor: "#fff",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "end",
-                      height: "14vh",
-                      width: "90vw",
-                      paddingLeft: "3em", 
-                      
-                    }}
-                  >
-                    <List style={{ backgroundColor: "#fff", height: "117px" }}>
-                      {!selectedTrayPreviewOpenButton &&
-                        selectedAttribute &&
-                        !isTrayOpen && (
-                          <Swiper 
-                          spaceBetween={5}
-                          slidesPerView={2}
-                          navigation={true}
-                          modules={[ Navigation]}
-                          //onSlideChange={() => console.log('slide change')}
-                          //onSwiper={(swiper) => console.log(swiper)}
-                        >
+                {selectedAttribute &&
+                  selectedAttribute.options.length >= slidesToShow &&
+                  width <= 400 && (
+                    <div
+                      className="mobileCarousel"
+                      style={{
+                        backgroundColor: "#fff",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "end",
+                        height: "14vh",
+                        width: "90vw",
+                        paddingLeft: "3em",
+                      }}
+                    >
+                      <List
+                        style={{ backgroundColor: "#fff", height: "117px" }}
+                      >
+                        {!selectedTrayPreviewOpenButton &&
+                          selectedAttribute &&
+                          !isTrayOpen && (
+                            <Swiper
+                              spaceBetween={5}
+                              slidesPerView={2}
+                              navigation={true}
+                              modules={[Navigation]}
+                            >
                               {selectedAttribute.options.map((option) => (
-                              <>
-                              <SwiperSlide>
-                              
-                                <ListItemColor
-                                  key={option.id}
-                                  onClick={() => {
-                                    selectOption(option.id);
-                                  }}
-                                  selected={option.selected}
-                                  selectedColor={selectedColorName}
-                                >
-                                  {option.imageUrl && (
-                                    <ListItemImage
-                                      src={option.imageUrl}
-                                      onClick={() => selectColorName(option.name)}
+                                <>
+                                  <SwiperSlide>
+                                    <ListItemColor
+                                      key={option.id}
+                                      onClick={() => {
+                                        selectOption(option.id);
+                                      }}
                                       selected={option.selected}
-                                    />
-                                  )}
-                                </ListItemColor>
-                                </SwiperSlide>
-                              </>
-                              
-                            ))}
-
-                        </Swiper>                        
-                        )}
-                      {/* {selectedColorName}   */}
-                    </List>
-                  </div>
-                )}
-
-
+                                      selectedColor={selectedColorName}
+                                    >
+                                      {option.imageUrl && (
+                                        <ListItemImage
+                                          src={option.imageUrl}
+                                          onClick={() =>
+                                            selectColorName(option.name)
+                                          }
+                                          selected={option.selected}
+                                        />
+                                      )}
+                                    </ListItemColor>
+                                  </SwiperSlide>
+                                </>
+                              ))}
+                            </Swiper>
+                          )}
+                        {/* {selectedColorName}   */}
+                      </List>
+                    </div>
+                  )}
               </div>
             )}
           </div>
